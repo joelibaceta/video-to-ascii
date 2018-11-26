@@ -3,6 +3,7 @@ import numpy as np
 
 def load_video_frames(filename):
     cap = cv2.VideoCapture(filename) 
+    cap.set(cv2.CAP_PROP_FPS, 10)
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     return cap, length
 

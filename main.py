@@ -16,11 +16,11 @@ clear = lambda: os.system('clear')
 filename = sys.argv[1:][0]
 reader, frames_count = engine.load_video_frames(filename) 
 
-
+str = ''
 counter = 0
 
 while(reader.isOpened()):
-
+    
     t0 = time.clock()
 
     width = reader.get(cv2.CAP_PROP_FRAME_WIDTH)   # float
@@ -31,25 +31,36 @@ while(reader.isOpened()):
     reduced_width = int(width * REDUCTION_PERCENT / 100)
     reduced_height = int(height * REDUCTION_PERCENT / 100)
 
+    fill_left_with_blank = int(columns) - (reduced_width * 2) 
+
+    
+    
+
     # read frame by frame
     ret, frame = reader.read()
     frame = engine.rescale_frame(frame, percent=REDUCTION_PERCENT)
-    str = ''
+    
     for j in range(reduced_height): 
         for i in range(reduced_width):
             pixel = frame[j][i]
             ascii_char = processor.pixel_to_ascii(pixel) 
             str += ascii_char
-        str += "\n"
+        str += (" " * fill_left_with_blank)
+    str += "\r\n"
+
+    
+    
 
     t1 = time.clock()
     delta = time_delta - (t1 - t0)
     if (delta > 0):
         time.sleep(delta)
-
-    print str
-    counter += 1
+    sys.stdout.write( str )
+    str = ''
     
+    counter += 1 
+
+
 file.close()
 reader.release()
 cv2.destroyAllWindows()

@@ -1,17 +1,15 @@
 from image_processor import processor
+from image_processor import color
+import colorsys
 
-ansi_color = processor.rgb_to_ansi(195, 226, 219)
+r, g, b = 45.0, 226.0, 219.0
 
+ansi_color = color.rgb_to_ansi(r, g, b)
 
-
-
-print ansi_color
 print(processor.colorize_char(ansi_color, ansi_color))
 
-number = ansi_color
-
-rgb_R = ((number - 16) // 36) * 51
-rgb_G = (((number - 16) % 36) // 6) * 51
-rgb_B = ((number - 16) % 6) * 51
-
-print rgb_R, rgb_G, rgb_B
+h, s, v = colorsys.rgb_to_hsv(r, g, b)
+print h, s, v
+r, g, b = colorsys.hsv_to_rgb(h, s, v)
+print r, g, b
+ 
