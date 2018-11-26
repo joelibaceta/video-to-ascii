@@ -1,6 +1,6 @@
 from image_processor import processor
 
-ansi_color = processor.rgb_to_ansi(135, 87, 57)
+ansi_color = processor.rgb_to_ansi(195, 226, 219)
 
 
 

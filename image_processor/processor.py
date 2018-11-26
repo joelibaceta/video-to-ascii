@@ -11,7 +11,7 @@ def colorize_char(char, ansi_color):
     return str_colorized
 
 def pixel_to_ascii(pixel):
-    r, g, b = pixel[0], pixel[1], pixel[2]
+    b, g, r = pixel[0], pixel[1], pixel[2]
     bright = rgb_to_brightness(pixel)
     char = brightness_to_ascii(bright)
     
@@ -27,7 +27,7 @@ def brightness_to_ascii(bright):
     i = optimize(bright)
     return CHARS[i]
 
-def rgb_to_ansi(b, g, r): 
+def rgb_to_ansi(r, g, b): 
     
     if (r == g & g == b):
         if (r < 8):
