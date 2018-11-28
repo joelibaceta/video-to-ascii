@@ -51,7 +51,3 @@ def play(filename):
         except:
             break
 
-try:
-    reader.release()
-    cv2.destroyAllWindows()
-
