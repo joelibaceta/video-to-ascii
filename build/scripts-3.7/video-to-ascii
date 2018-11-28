@@ -1,7 +1,0 @@
-#!python
-
-import video_to_ascii
-
-filename = sys.argv[1:][0]
-
-video_to_ascii.play(filename)
