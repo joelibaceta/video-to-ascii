@@ -2,6 +2,9 @@
 
 Its a simple python package to play videos through terminal characters.
 
+[![PyPI version](https://badge.fury.io/py/video-to-ascii.svg)](https://badge.fury.io/py/video-to-ascii)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a5fcdf2b0cab41654ca3/maintainability)](https://codeclimate.com/github/joelibaceta/video-to-terminal/maintainability)
+
 # Installation
 
 ```python
