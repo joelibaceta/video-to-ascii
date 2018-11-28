@@ -6,7 +6,7 @@ setuptools.setup(
     author="Joel Ibaceta",
     author_email="mail@joelibaceta.com",
     description="A simple tool to play a video using ascii characters",
-    url="https://github.com/joelibaceta/video-to-terminal",
+    url="https://github.com/joelibaceta/video-to-ascii",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
