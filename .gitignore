@@ -2,4 +2,4 @@
 .env
 .DS_Store
 *.pyc
-.vscode
+videos
