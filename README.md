@@ -7,6 +7,7 @@ Its a simple python package to play videos through terminal characters.
 ```python
 pip install video-to-ascii
 ```
+> The installation will copy the main script to your PATH and making it available for general use.
 
 # How to use
 
