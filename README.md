@@ -1,6 +1,20 @@
-# Video to Ascii
+![Logo](images/logo.png =200x200)
 
 Its a simple python package to play videos through terminal characters.
+
+# Installation
+
+```python
+pip install video-to-ascii
+```
+
+# How to use
+
+Just run in your terminal `video-to-ascii` + your video path.
+
+```bash
+video-to-ascii myvideo.mp4
+```
 
 ## How it works
 

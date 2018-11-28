@@ -3,3 +3,6 @@
 .DS_Store
 *.pyc
 videos
+.vscode
+dist
+video_to_ascii.egg-info
