@@ -1,6 +1,5 @@
 #!python
 
-import sys
 import video_to_ascii
 
 filename = sys.argv[1:][0]
