@@ -10,7 +10,7 @@ def play(filename):
 
     fps = 30
     time_delta = 1./fps
-    str = 0
+    str = ''
 
     rows, columns = os.popen('stty size', 'r').read().split()
     reader, frames_count = engine.load_video_frames(filename) 
@@ -37,7 +37,7 @@ def play(filename):
             for i in range(reduced_width):
                 pixel = frame[j][i]
                 ascii_char = processor.pixel_to_ascii(pixel) 
-                str += ascii_char
+                str += str(ascii_char)
             str += (" " * fill_left_with_blank)
         str += "\r\n"
 
