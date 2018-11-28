@@ -1,4 +1,4 @@
-![Logo](images/logo_small.png )
+![Logo](images/logo.svg)
 
 Its a simple python package to play videos through terminal characters.
 
