@@ -37,7 +37,7 @@ def play(filename):
             for i in range(reduced_width):
                 pixel = frame[j][i]
                 ascii_char = processor.pixel_to_ascii(pixel) 
-                str += str(ascii_char)
+                str += ascii_char
             str += (" " * fill_left_with_blank)
         str += "\r\n"
 
