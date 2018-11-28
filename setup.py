@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="video_to_ascii",
-    version="1.0.1",
+    version="1.0.2",
     author="Joel Ibaceta",
     author_email="mail@joelibaceta.com",
     description="A simple tool to play a video using ascii characters",
