@@ -1,0 +1,7 @@
+include requirements.txt
+prune videos
+prune build
+prune dist
+global-exclude *.md *.in
+recursive-include video_to_ascii *.py
+recursive-exclude video_to_ascii *.pyc *.txt

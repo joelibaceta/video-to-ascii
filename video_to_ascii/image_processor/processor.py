@@ -17,7 +17,7 @@ def pixel_to_ascii(pixel):
   
     h, s, v = colorsys.rgb_to_hsv(float(r), float(g), float(b))
     s = s + 0.3 if s + 0.3 < 1.0 else 1.0
-    r, g, b = colorsys.hsv_to_rgb(h, s, v) 
+    r, g, b = colorsys.hsv_to_rgb(h, s, v)
 
     bright = color.rgb_to_brightness(pixel)
     char = brightness_to_ascii(bright)

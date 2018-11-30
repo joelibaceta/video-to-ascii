@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 
 def load_video_frames(filename):
     cap = cv2.VideoCapture(filename) 
