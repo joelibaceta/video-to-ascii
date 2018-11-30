@@ -1,6 +1,5 @@
 import os
 import cv2
-import numpy as np
 import sys
 from image_processor import processor
 from video_processor import engine
