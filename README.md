@@ -7,12 +7,12 @@ It's a simple python package to play videos in a terminal using [ASCII](https://
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/joelibaceta/video-to-ascii)
 [![HitCount](http://hits.dwyl.io/joelibaceta/https://github.com/joelibaceta/video-to-ascii.svg)](http://hits.dwyl.io/joelibaceta/https://github.com/joelibaceta/video-to-ascii)
 
-![frames](images/Simpsons.png)
+![frames](images/Simpsons.gif)
 
 ## Installation
 ```python
 pip install video-to-ascii
-```
+```Simpsons.png
 > The installation should copy the main script to your PATH and making it available for general use.
 
 ## How to use
