@@ -1,5 +1,5 @@
 from xtermcolor import colorize
-import color
+from . import color
 import colorsys
 
 CHARS = ['@','#','$','=','*','!',';',':','~','-',',','.',' ', ' ']
@@ -27,7 +27,7 @@ def pixel_to_ascii(pixel):
     return str_color
 
 def brightness_to_ascii(bright):
-    i = optimize(bright)
+    i = int(optimize(bright))
     return CHARS[i]
 
 

@@ -1,8 +1,8 @@
 import os
 import cv2
 import sys
-from image_processor import processor
-from video_processor import engine
+from .image_processor import processor
+from .video_processor import engine
 import time
 
 def play(filename):

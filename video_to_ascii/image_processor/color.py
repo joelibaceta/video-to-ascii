@@ -5,8 +5,6 @@ def rgb_to_brightness(rgb):
 
 def rgb_to_ansi(r, g, b): 
 
-     
-
     r, g, b = int(r), int(g), int(b)
 
     if (r == g & g == b):

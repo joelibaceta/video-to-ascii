@@ -1,15 +1,16 @@
-import setuptools
+from setuptools import setup, find_packages
 
-setuptools.setup(
+setup(
     name="video_to_ascii",
-    version="1.1.3",
+    version="1.1.4",
     author="Joel Ibaceta",
     author_email="mail@joelibaceta.com",
     description="A simple tool to play a video using ascii characters",
     url="https://github.com/joelibaceta/video-to-ascii",
-    packages=setuptools.find_packages(),
+    packages=find_packages(),
+    include_package_data=True,
     install_requires=[
-          'opencv-python', 'colorize'
+          'opencv-python', 'xtermcolor'
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

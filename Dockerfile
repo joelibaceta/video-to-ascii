@@ -1,4 +1,6 @@
 FROM python:3
 
-RUN pip install video-to-ascii
+ADD . /source/
+
+RUN pip install -e /source 
 
