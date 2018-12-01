@@ -10,7 +10,7 @@ It's a simple python package to play videos in a terminal using [ASCII](https://
 ![frames](images/Simpsons.gif)
 
 ## Installation
-```python
+```bash
 pip install video-to-ascii
 ```
 
