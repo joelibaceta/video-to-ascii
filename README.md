@@ -18,27 +18,10 @@ pip install video-to-ascii
 
 ## How to use
 
-### As a command line script
-
 Just run `video-to-ascii your video path` in your terminal
 
 ```bash
 $ video-to-ascii myvideo.mp4
-```
-
-### Using docker
-
-Build the image
-```bash
-docker build -t videoToAsciiImage .
-```
-Run the container setting up a volumen to load a video folder.
-```bash
-docker run --rm --name videoToAsciiContainer  -v $(pwd)/videos/:/videos -it videoToAsciiImage /bin/bash
-```
-Run the script in your docker container shell
-```bash
-video-to-ascii /videos/yourvideo.mp4
 ```
 
 ## How it works
