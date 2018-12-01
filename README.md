@@ -1,5 +1,5 @@
 ![Logo](images/logo.svg)
-
+<br/><br/>
 It's a simple python package to play videos in a terminal using [ASCII](https://en.wikipedia.org/wiki/ASCII) characters.
 
 [![PyPI version](https://badge.fury.io/py/video-to-ascii.svg)](https://badge.fury.io/py/video-to-ascii)
