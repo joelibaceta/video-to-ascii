@@ -7,3 +7,4 @@ videos
 dist
 video_to_ascii.egg-info
 build/
+test.py
