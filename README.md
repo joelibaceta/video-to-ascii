@@ -36,7 +36,7 @@ Since a terminal has a specific number of rows and columns, we have to resize ou
 
 To reach a correct visualization of an entire frame we need to adjust the _frame height_ to match the _terminal rows_, avoiding using more _characters_ than the number of _terminal columns_.
 
-![frames](images/imgFrameResize.png)
+![frames](images/imgResizing.png)
 
 When picking a character to represent a pixel we need to measure the relevance of that pixel's color in the frame, based on that we can then select the most appropriate character based on the intensity they represent.
 
