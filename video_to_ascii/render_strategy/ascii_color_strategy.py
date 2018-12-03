@@ -72,6 +72,8 @@ class AsciiColorStrategy(re.RenderStrategy):
         while(vc.isOpened()):
             t0 = time.clock()
             _ret, frame = vc.read()
+            if (frame is None):
+                break
             # scale each frame according to terminal dimensions
             resized_frame = self.resize_frame(frame)
             # convert frame pixels to colored string
