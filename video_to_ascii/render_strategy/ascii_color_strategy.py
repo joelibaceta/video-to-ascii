@@ -37,15 +37,15 @@ class AsciiColorStrategy(re.RenderStrategy):
         h, w, _ = frame.shape
         printing_width = int(min(int(cols), (w*2))/2)
         padding_right = max(int(cols) - (w*2), 0)
-        str = ''
+        msg = ''
         for j in range(h):
             for i in range(printing_width):
                 pixel = frame[j][i]
                 colored_ascii_char = ipe.pixel_to_ascii(pixel)
-                str += colored_ascii_char
-            str += (" " * padding_right)
-        str += "\r\n"
-        return str
+                msg += colored_ascii_char
+            msg += (" " * padding_right)
+        msg += "\r\n"
+        return msg
 
     def render(self, vc):
         """
@@ -79,12 +79,14 @@ class AsciiColorStrategy(re.RenderStrategy):
             # convert frame pixels to colored string
             str = self.convert_frame_pixels_to_ascii(resized_frame)
             # sleep if the process was too fast
+            sys.stdout.write('\u001b[0;0H')
             t1 = time.clock()
             delta = time_delta - (t1 - t0)
             if (delta > 0):
                 time.sleep(delta)
             # Print the final string
             sys.stdout.write(str)
+            
 
     def resize_frame(self, frame):
         """
