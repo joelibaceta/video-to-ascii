@@ -21,7 +21,7 @@ pip install video-to-ascii
 Just run `video-to-ascii your video path` in your terminal
 
 ```bash
-$ video-to-ascii myvideo.mp4
+$ video-to-ascii -f myvideo.mp4
 ```
 
 ## How it works
