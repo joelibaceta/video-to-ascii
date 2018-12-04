@@ -6,7 +6,6 @@ It's a simple python package to play videos in a terminal using [ASCII](https://
 [![Maintainability](https://api.codeclimate.com/v1/badges/a5fcdf2b0cab41654ca3/maintainability)](https://codeclimate.com/github/joelibaceta/video-to-terminal/maintainability)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/joelibaceta/video-to-ascii)
 [![HitCount](http://hits.dwyl.io/joelibaceta/https://github.com/joelibaceta/video-to-ascii.svg)](http://hits.dwyl.io/joelibaceta/https://github.com/joelibaceta/video-to-ascii)
-[![Analytics](https://ga-beacon.appspot.com/UA-74841148-4/readme)](https://github.com/igrigorik/ga-beacon)
 
 ![frames](images/Simpsonsv2.gif)
 
