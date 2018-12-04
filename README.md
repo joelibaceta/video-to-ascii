@@ -8,7 +8,7 @@ It's a simple python package to play videos in a terminal using [ASCII](https://
 [![HitCount](http://hits.dwyl.io/joelibaceta/https://github.com/joelibaceta/video-to-ascii.svg)](http://hits.dwyl.io/joelibaceta/https://github.com/joelibaceta/video-to-ascii)
 [![Analytics](https://ga-beacon.appspot.com/UA-74841148-4/readme)](https://github.com/igrigorik/ga-beacon)
 
-![frames](images/Simpsons.gif)
+![frames](images/Simpsons.apng)
 
 ## Installation
 ```bash
