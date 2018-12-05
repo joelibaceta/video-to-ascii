@@ -1,9 +1,9 @@
 from xtermcolor import colorize
 import colorsys
 
-CHARS_LIGHT = ['@', '#', '$', '=', '*', '!', ';', ':', '~', '-', ',', '.', ' ', ' ']
-CHARS_COLOR = ['*', 'e', 's', '◍', 'o']
-CHARS_FILLED = ['▓', '▒', '░']
+CHARS_LIGHT = [' ', ' ', '.', ':', '!', '+', '*', 'e', '$', '@', '8']
+CHARS_COLOR = ['.', '*', 'e', 's', '◍']
+CHARS_FILLED = ['░', '▒', '▓', '█']
 
 DENSITY = [CHARS_LIGHT, CHARS_COLOR, CHARS_FILLED]
 
@@ -38,17 +38,19 @@ def pixel_to_ascii(pixel, colored=True, density=0):
         ansi_color = rgb_to_ansi(r, g, b)
         char = colorize(char*2, ansi=ansi_color)
     else:
-        bright = rgb_to_brightness(r, g, b)
+        bright = rgb_to_brightness(r, g, b, grayscale=True)
         char = brightness_to_ascii(bright, density)
         char = char*2
     return char
 
-def rgb_to_brightness(r, g, b):
+def rgb_to_brightness(r, g, b, grayscale=False):
     """
     Calc a brighness factor according to rgb color
-    """ 
-    #return int((rgb[0] + rgb[1] + rgb[2]) / 3)
-    return 0.267*r + 0.642*g + 0.091*b
+    """
+    if grayscale:
+        return 0.2126*r + 0.7152*g + 0.0722*b
+    else:
+        return 0.267*r + 0.642*g + 0.091*b
 
 def rgb_to_ansi(r, g, b):
     """
