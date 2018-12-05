@@ -45,9 +45,20 @@ To reach a correct visualization of an entire frame we need to adjust the _frame
 
 ![frames](images/imgResizing.png)
 
-When picking a character to represent a pixel we need to measure the relevance of that pixel's color in the frame, based on that we can then select the most appropriate character based on the intensity they represent.
+When picking a character to represent a pixel we need to measure the relevance of that pixel's color in the frame, based on that we can then select the most appropriate character based on the [relative luminance] in colorimetric spaces(https://en.wikipedia.org/wiki/Relative_luminance), using a simplify version of the luminosity function.
 
-![frames](images/imgBrightnes.png)
+![LuminosityFunction](images/LuminosityFunction.svg)
+
+> Green light contributes the most to the intensity perceived by humans, and blue light the least.
+
+
+This function returns an integer in the range from 0 to 255, we assign a character according to density to show more colored surface for areas with more intense color (highest values).
+
+```python
+CHARS_LIGHT 	= [' ', ' ', '.', ':', '!', '+', '*', 'e', '$', '@', '8']
+CHARS_COLOR 	= ['.', '*', 'e', 's', '@']
+CHARS_FILLED    = ['░', '▒', '▓', '█']
+```
 
 The reduced range of colors supported by the terminal is a problem we need to account for. Modern terminals support up to 256 colors, so we need to find the closest 8 bit color that matches the original pixel color, we call this set of 256 colors [ANSI colors](https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences).
 
