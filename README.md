@@ -64,9 +64,9 @@ CHARS_FILLED    = ['░', '▒', '▓', '█']
 
 The reduced range of colors supported by the terminal is a problem we need to account for. Modern terminals support up to 256 colors, so we need to find the closest 8 bit color that matches the original pixel in 16 or 24 bit color, we call this set of 256 colors [ANSI colors](https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences).
 
-![colors](images/display-colors.jpg)
-
 ![frames](images/imgPixelSection.png)
+
+![colors](images/8-bit_color_table.png)
 
 Finally, when putting it all together, we will have an appropriate character for each pixel and a new color.
 
