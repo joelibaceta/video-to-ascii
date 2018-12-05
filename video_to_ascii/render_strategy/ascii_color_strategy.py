@@ -7,10 +7,10 @@ import sys
 import os
 import cv2
 
-from . import render_strategy as re
+from . import ascii_strategy as strategy
 from .. import image_processor as ipe
 
-class AsciiColorStrategy(re.RenderStrategy):
+class AsciiColorStrategy(strategy.AsciiStrategy):
     """Print each frame in the terminal using ascii characters"""
 
     def convert_frame_pixels_to_ascii(self, frame):
@@ -41,7 +41,7 @@ class AsciiColorStrategy(re.RenderStrategy):
         for j in range(h):
             for i in range(printing_width):
                 pixel = frame[j][i]
-                colored_ascii_char = ipe.pixel_to_ascii(pixel)
+                colored_ascii_char = ipe.pixel_to_ascii(pixel, density=1)
                 msg += colored_ascii_char
             msg += (" " * padding_right)
         msg += "\r\n"

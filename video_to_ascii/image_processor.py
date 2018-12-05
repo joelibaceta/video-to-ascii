@@ -2,19 +2,17 @@ from xtermcolor import colorize
 import colorsys
 
 CHARS_LIGHT = ['@', '#', '$', '=', '*', '!', ';', ':', '~', '-', ',', '.', ' ', ' ']
-CHARS_FILLED = ['*', 'e', 's', '◍', 'o']
+CHARS_COLOR = ['*', 'e', 's', '◍', 'o']
+CHARS_FILLED = ['▓', '▒', '░']
+
+DENSITY = [CHARS_LIGHT, CHARS_COLOR, CHARS_FILLED]
 
 def brightness_to_ascii(i, density=0):
     """
     Get an apropiate char of brighnes from a rgb color
     """
-    if density == 1:
-        chars_collection = CHARS_FILLED
-    else:
-        chars_collection = CHARS_LIGHT
+    chars_collection = DENSITY[density]
     size = len(chars_collection) - 1
-    #print(i)
-    #print(size)
     index = int(size * i / 255) #int((i / 255) * size) 
     return chars_collection[index]
 
@@ -25,7 +23,7 @@ def colorize_char(char, ansi_color):
     str_colorized = colorize(char, ansi=ansi_color)
     return str_colorized
 
-def pixel_to_ascii(pixel, colored=True):
+def pixel_to_ascii(pixel, colored=True, density=0):
     """
     Convert a pixel to char
     """
@@ -36,12 +34,13 @@ def pixel_to_ascii(pixel, colored=True):
         bright = rgb_to_brightness(r, g, b)
         s = s + 0.3 if s + 0.3 < 1.0 else 1.0
         r, g, b = colorsys.hsv_to_rgb(h, s, v)
-        char = brightness_to_ascii(bright, density=1)
+        char = brightness_to_ascii(bright, density)
         ansi_color = rgb_to_ansi(r, g, b)
         char = colorize(char*2, ansi=ansi_color)
     else:
         bright = rgb_to_brightness(r, g, b)
-        char = brightness_to_ascii(bright)
+        char = brightness_to_ascii(bright, density)
+        char = char*2
     return char
 
 def rgb_to_brightness(r, g, b):
