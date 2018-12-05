@@ -45,9 +45,9 @@ To reach a correct visualization of an entire frame we need to adjust the _frame
 
 ![frames](images/imgResizing.png)
 
-When picking a character to represent a pixel we need to measure the relevance of that pixel's color in the frame, based on that we can then select the most appropriate character based on the [relative luminance] in colorimetric spaces(https://en.wikipedia.org/wiki/Relative_luminance), using a simplify version of the luminosity function.
+When picking a character to represent a pixel we need to measure the relevance of that pixel's color in the frame, based on that we can then select the most appropriate character based on the [relative luminance](https://en.wikipedia.org/wiki/Relative_luminance) in colorimetric spaces, using a simplify version of the luminosity function.
 
-![LuminosityFunction](images/LuminosityFunction.svg)
+![LuminosityFunction](images/Luminosity.svg)
 
 > Green light contributes the most to the intensity perceived by humans, and blue light the least.
 
