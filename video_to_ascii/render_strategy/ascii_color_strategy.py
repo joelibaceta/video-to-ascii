@@ -108,6 +108,6 @@ class AsciiColorStrategy(re.RenderStrategy):
         reduced_width = int(w * reduction_factor / 100)
         reduced_height = int(h * reduction_factor / 100)
         dimension = (reduced_width, reduced_height)
-        resized_frame = cv2.resize(frame, dimension, interpolation=cv2.INTER_AREA)
+        resized_frame = cv2.resize(frame, dimension, interpolation=cv2.INTER_LINEAR)
         return resized_frame
         
