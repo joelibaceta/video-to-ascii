@@ -8,7 +8,7 @@ import os
 import cv2
 
 from . import ascii_strategy as strategy
-from .. import image_processor as ipe
+from . import image_processor as ipe
 
 class AsciiBWStrategy(strategy.AsciiStrategy):
     """Print each frame in the terminal using ascii characters"""

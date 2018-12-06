@@ -8,7 +8,7 @@ import os
 import cv2
 
 from . import render_strategy as re
-from .. import image_processor as ipe
+from . import image_processor as ipe
 
 class AsciiStrategy(re.RenderStrategy):
     """Print each frame in the terminal using ascii characters"""
