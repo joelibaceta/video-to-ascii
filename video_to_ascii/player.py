@@ -10,4 +10,7 @@ def play(filename, **kwargs):
     if "strategy" in kwargs:
         engine.set_strategy(kwargs["strategy"])
     engine.load_video_from_file(filename)
-    engine.play()
+    if "output" in kwargs:
+        engine.export(kwargs["output"])
+    else:
+        engine.play()

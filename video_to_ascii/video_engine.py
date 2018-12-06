@@ -32,3 +32,9 @@ class VideoEngine:
         Play the video captured using an specific render strategy
         """
         self.render_strategy.render(self.read_buffer)
+
+    def export(self, file):
+        """
+        Export the video captured using an specific render strategy to file
+        """
+        self.render_strategy.render(self.read_buffer, output=file)
