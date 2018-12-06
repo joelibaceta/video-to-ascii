@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="video_to_ascii",
-    version="1.2.0",
+    version="1.2.2",
     author="Joel Ibaceta",
     author_email="mail@joelibaceta.com",
     license='MIT',

@@ -47,7 +47,7 @@ class AsciiStrategy(re.RenderStrategy):
         msg += "\r\n"
         return msg
 
-    def render(self, vc):
+    def render(self, vc, output=None):
         """
         Iterate each video frame to print a set of ascii chars
 
