@@ -5,7 +5,7 @@ from video_to_ascii import player
 
 CLI_DESC = "It is a simple python package to play videos in the terminal using colored characters as pixels or other usefull outputs"
 
-EPILOG = ("\033[1;37mThanks for trying video-to-ascii!\033[0m 👍")
+EPILOG = ("\033[1;37mThanks for trying video-to-ascii!\033[0m")
 
 PARSER = argparse.ArgumentParser(prog='video-to-ascii', description=CLI_DESC, epilog=EPILOG)
 PARSER.add_argument('-f', '--file', type=str, dest='file', help='input video file', action='store', required=True)
