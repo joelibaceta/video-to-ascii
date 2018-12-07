@@ -1,4 +1,4 @@
-![Logo](images/logo.png)
+![Logo](images/logo.svg)
 <br/><br/>
 It's a simple python package to play videos in a terminal using [ASCII](https://en.wikipedia.org/wiki/ASCII) characters.
 
