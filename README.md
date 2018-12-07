@@ -31,6 +31,13 @@ Allow to choose an strategy to render the output
 
 ![strategies](images/Strategies.png)
 
+**-o --output**
+Export the rendering output to a bash file to share with someone
+
+![strategies](images/export.png)
+
+<br/>
+
 ## How it works
 
 Every video is composed by a set of frames that are played at a certain frame rate.
