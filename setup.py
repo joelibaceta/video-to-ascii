@@ -25,5 +25,9 @@ setup(
         "Operating System :: OS Independent",
     ],
     keywords='video ascii terminal opencv',
-    scripts=['bin/video-to-ascii'],
+    entry_points={
+        "console_scripts": [
+            'video-to-ascii=video_to_ascii.cli:main'
+        ]
+    }
 )
