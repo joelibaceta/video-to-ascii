@@ -6,7 +6,7 @@ class RenderStrategy(ABC):
     """An abstract class to guide about how to implement a render_strategy class"""
 
     @abstractmethod
-    def render(self, vc, output=None):
+    def render(self, cap, output=None):
         """
         This method must be implemented with the necessary instructions to process the video frames and generate the output
         """

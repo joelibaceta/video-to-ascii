@@ -2,11 +2,6 @@
 This module contains a class AsciiColorStrategy, o process video frames and build an ascii output
 """
 
-import time
-import sys
-import os
-import cv2
-
 from . import ascii_strategy as strategy
 from . import image_processor as ipe
 
@@ -22,6 +17,5 @@ class AsciiColorFilledStrategy(strategy.AsciiStrategy):
 
         Returns:
             str: The resulting set of colored chars as a unique string
-
         """
         return ipe.pixel_to_ascii(pixel, colored=False)
