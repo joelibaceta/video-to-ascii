@@ -17,7 +17,7 @@ else:
 
 setup(
     name="video_to_ascii",
-    version="1.2.5",
+    version="1.2.6",
     author="Joel Ibaceta",
     author_email="mail@joelibaceta.com",
     license='MIT',

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
-from video_to_ascii import player
+d from video_to_ascii import player
 
 CLI_DESC = "It is a simple python package to play videos in the terminal using colored characters as pixels or other usefull outputs"
 EPILOG = ("\033[1;37mThanks for trying video-to-ascii!\033[0m")
