@@ -12,6 +12,7 @@ class VideoEngine:
         strategy_object = re.STRATEGIES[strategy]
         self.render_strategy = strategy_object
         self.read_buffer = None
+        self.with_audio = False
 
     def set_strategy(self, strategy):
         """
@@ -31,4 +32,7 @@ class VideoEngine:
         """
         Play the video captured using an specific render strategy
         """
-        self.render_strategy.render(self.read_buffer, file)
+        
+        self.render_strategy.render(self.read_buffer, 
+            output=file, 
+            with_audio=self.with_audio)

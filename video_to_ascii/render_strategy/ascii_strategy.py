@@ -6,6 +6,7 @@ import time
 import sys
 import os
 import cv2
+import tempfile 
 
 from . import render_strategy as re
 from . import image_processor as ipe
@@ -62,7 +63,7 @@ class AsciiStrategy(re.RenderStrategy):
     def apply_end_line_modifier(self, msg):
         return msg
 
-    def render(self, cap, output=None):
+    def render(self, cap, output=None, with_audio=False):
         """
         Iterate each video frame to print a set of ascii chars
 
@@ -83,7 +84,25 @@ class AsciiStrategy(re.RenderStrategy):
         v_height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         length = cap.get(cv2.CAP_PROP_FRAME_COUNT)
         fps = cap.get(cv2.CAP_PROP_FPS)
-        
+
+        if with_audio:
+            import pyaudio
+            import wave
+
+            temp_dir = tempfile.gettempdir()
+            temp_file_path = temp_dir + "/temp.wav"
+            wave_file = wave.open(temp_file_path, 'rb')
+            chunk = int(44100 / fps)
+            p = pyaudio.PyAudio()
+
+            stream = p.open(format =
+                p.get_format_from_width(wave_file.getsampwidth()),
+                channels = wave_file.getnchannels(),
+                rate = wave_file.getframerate(),
+                output = True)
+                       
+            data = wave_file.readframes(chunk)
+            
 
         if output is not None:
             file = open(output, 'w+')
@@ -96,11 +115,16 @@ class AsciiStrategy(re.RenderStrategy):
         sys.stdout.write("echo -en '\033[2J' \n")
         # read each frame
         while cap.isOpened():
+
+
             t0 = time.clock()
             rows, cols = os.popen('stty size', 'r').read().split()
             _ret, frame = cap.read()
             if frame is None:
                 break
+            if with_audio:
+                data = wave_file.readframes(chunk)
+                stream.write(data)
             # sleep if the process was too fast
             if output is None:
                 sys.stdout.write('\u001b[0;0H')
@@ -122,6 +146,9 @@ class AsciiStrategy(re.RenderStrategy):
                 file.write("echo -en '" + msg + "'" + "\n" ) 
                 file.write("echo -en '\u001b[0;0H' \n")
             counter += 1
+        if with_audio:
+            stream.close()
+            p.terminate() 
         sys.stdout.write("echo -en '\033[2J' \n")
 
     def build_progress(self, progress, total):
