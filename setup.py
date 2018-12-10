@@ -1,8 +1,23 @@
+import sys
 from setuptools import setup, find_packages
+from setuptools.command.install import install
+from setuptools.command.develop import develop
+from setuptools.command.egg_info import egg_info
+
+def install_package(package):
+    from pip._internal import main as pip
+    pip(['install', package])
+
+if "--with-audio" in sys.argv:
+    install_package('opencv-python')
+    install_package('pyaudio')
+    sys.argv.remove("--with-audio")
+else:
+    install_package('opencv-python')
 
 setup(
     name="video_to_ascii",
-    version="1.2.2",
+    version="1.2.3",
     author="Joel Ibaceta",
     author_email="mail@joelibaceta.com",
     license='MIT',
@@ -15,9 +30,7 @@ setup(
     },
     packages=find_packages(),
     include_package_data=True,
-    install_requires=[
-          'opencv-python', 'xtermcolor'
-    ],
+    install_requires=['xtermcolor', 'ffmpeg-python'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Intended Audience :: Developers",
