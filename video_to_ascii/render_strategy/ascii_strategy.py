@@ -90,7 +90,7 @@ class AsciiStrategy(re.RenderStrategy):
             import wave
 
             temp_dir = tempfile.gettempdir()
-            temp_file_path = temp_dir + "/temp.wav"
+            temp_file_path = temp_dir + "/temp-audiofile-for-vta.wav"
             wave_file = wave.open(temp_file_path, 'rb')
             chunk = int(44100 / fps)
             p = pyaudio.PyAudio()
