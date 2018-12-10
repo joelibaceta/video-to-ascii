@@ -9,12 +9,20 @@ It's a simple python package to play videos in a terminal using [ASCII](https://
 
 ![frames](images/Simpsons.apng)
 
-## Installation
-```bash
-pip install video-to-ascii
-```
+## Requirements
+- Python3
+- PortAudio (_Only required for installation with audio support_)
+- FFmpeg (_Only required for installation with audio support_)
 
-> The installation should copy the main script to your PATH and making it available for general use.
+## Installation
+Standard installation
+```bash
+pip3 install video-to-ascii
+```
+With audio support installtion
+```bash
+pip3 install video-to-ascii --install-option="--with-audio"
+```
 
 ## How to use
 
@@ -36,6 +44,8 @@ Export the rendering output to a bash file to share with someone
 
 ![strategies](images/export.png)
 
+**-a --with-audio**
+If an installation with audio support was made, you can use this option to play the audio track while rendering the video ascii characters.
 <br/>
 
 ## How it works
