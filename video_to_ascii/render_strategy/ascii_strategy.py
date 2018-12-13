@@ -6,10 +6,10 @@ import time
 import sys
 import os
 import cv2
-import tempfile 
 
 from . import render_strategy as re
-from . import image_processor as ipe
+from video_to_ascii.core import image_engine as ipe
+from video_to_ascii.core.audio_engine import AudioEngine
 
 DEFAULT_TERMINAL_SIZE = 80, 25
 
@@ -85,55 +85,37 @@ class AsciiStrategy(re.RenderStrategy):
         length = cap.get(cv2.CAP_PROP_FRAME_COUNT)
         fps = cap.get(cv2.CAP_PROP_FPS)
 
-        if with_audio:
-            import pyaudio
-            import wave
-
-            temp_dir = tempfile.gettempdir()
-            temp_file_path = temp_dir + "/temp-audiofile-for-vta.wav"
-            wave_file = wave.open(temp_file_path, 'rb')
-            chunk = int(44100 / fps)
-            p = pyaudio.PyAudio()
-
-            stream = p.open(format =
-                p.get_format_from_width(wave_file.getsampwidth()),
-                channels = wave_file.getnchannels(),
-                rate = wave_file.getframerate(),
-                output = True)
-                       
-            data = wave_file.readframes(chunk)
-            
-
         if output is not None:
             file = open(output, 'w+')
             file.write("#!/bin/bash \n")
             file.write("echo -en '\033[2J' \n")
             file.write("echo -en '\u001b[0;0H' \n")
+        else:
+            if with_audio:
+                audio_engine = AudioEngine()
+                audio_engine.load_audio_stream(fps)
 
         time_delta = 1./fps
         counter=0
         sys.stdout.write("echo -en '\033[2J' \n")
         # read each frame
         while cap.isOpened():
-
-
             t0 = time.clock()
             rows, cols = os.popen('stty size', 'r').read().split()
             _ret, frame = cap.read()
             if frame is None:
                 break
-            if with_audio:
-                data = wave_file.readframes(chunk)
-                stream.write(data)
-            # sleep if the process was too fast
             if output is None:
                 sys.stdout.write('\u001b[0;0H')
+                if with_audio:
+                    audio_engine.play_audio_chunk()
                 # scale each frame according to terminal dimensions
                 resized_frame = self.resize_frame(frame, (cols, rows))
                 # convert frame pixels to colored string
                 msg = self.convert_frame_pixels_to_ascii(resized_frame, (cols, rows)) 
                 t1 = time.clock()
                 delta = time_delta - (t1 - t0)
+                # sleep if the process was too fast
                 if delta > 0:
                     time.sleep(delta)
                 sys.stdout.write(msg) # Print the final string
@@ -146,9 +128,8 @@ class AsciiStrategy(re.RenderStrategy):
                 file.write("echo -en '" + msg + "'" + "\n" ) 
                 file.write("echo -en '\u001b[0;0H' \n")
             counter += 1
-        if with_audio:
-            stream.close()
-            p.terminate() 
+        if with_audio and output is None:
+           audio_engine.close()
         sys.stdout.write("echo -en '\033[2J' \n")
 
     def build_progress(self, progress, total):

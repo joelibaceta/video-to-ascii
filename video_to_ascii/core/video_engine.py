@@ -1,7 +1,7 @@
 """This module has a class for video processing"""
 
 import cv2
-from . import render_strategy as re
+from video_to_ascii import render_strategy as re
 
 class VideoEngine:
     """
