@@ -17,8 +17,10 @@ def main():
 
     ARGS = PARSER.parse_args()
 
-    player.play(ARGS.file, strategy=ARGS.strategy, output=ARGS.output, play_audio=ARGS.with_audio)
-
+    try:
+        player.play(ARGS.file, strategy=ARGS.strategy, output=ARGS.output, play_audio=ARGS.with_audio)
+    except (KeyboardInterrupt):
+        pass
 
 if __name__ == '__main__':
     main()
