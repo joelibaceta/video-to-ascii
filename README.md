@@ -8,7 +8,7 @@
   
   It's a simple python package to play videos in a terminal using [ASCII](https://en.wikipedia.org/wiki/ASCII) characters.
   
-  [![PyPI version](https://badge.fury.io/py/video-to-ascii.svg)](https://badge.fury.io/py/video-to-ascii)
+  [![Financial Contributors on Open Collective](https://opencollective.com/funny-opensource-projects/all/badge.svg?label=financial+contributors)](https://opencollective.com/funny-opensource-projects) [![PyPI version](https://badge.fury.io/py/video-to-ascii.svg)](https://badge.fury.io/py/video-to-ascii)
   [![Maintainability](https://api.codeclimate.com/v1/badges/a5fcdf2b0cab41654ca3/maintainability)](https://codeclimate.com/github/joelibaceta/video-to-terminal/maintainability)
   [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/joelibaceta/video-to-ascii)
   [![HitCount](http://hits.dwyl.io/joelibaceta/https://github.com/joelibaceta/video-to-ascii.svg)](http://hits.dwyl.io/joelibaceta/https://github.com/joelibaceta/video-to-ascii)
@@ -99,3 +99,33 @@ Finally, when putting it all together, we will have an appropriate character for
 
 ![frames](images/imgPixelImage.png)
 
+
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/joelibaceta/video-to-ascii/graphs/contributors"><img src="https://opencollective.com/funny-opensource-projects/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/funny-opensource-projects/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/funny-opensource-projects"><img src="https://opencollective.com/funny-opensource-projects/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/funny-opensource-projects/contribute)]
+
+<a href="https://opencollective.com/funny-opensource-projects/organization/0/website"><img src="https://opencollective.com/funny-opensource-projects/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/funny-opensource-projects/organization/1/website"><img src="https://opencollective.com/funny-opensource-projects/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/funny-opensource-projects/organization/2/website"><img src="https://opencollective.com/funny-opensource-projects/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/funny-opensource-projects/organization/3/website"><img src="https://opencollective.com/funny-opensource-projects/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/funny-opensource-projects/organization/4/website"><img src="https://opencollective.com/funny-opensource-projects/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/funny-opensource-projects/organization/5/website"><img src="https://opencollective.com/funny-opensource-projects/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/funny-opensource-projects/organization/6/website"><img src="https://opencollective.com/funny-opensource-projects/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/funny-opensource-projects/organization/7/website"><img src="https://opencollective.com/funny-opensource-projects/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/funny-opensource-projects/organization/8/website"><img src="https://opencollective.com/funny-opensource-projects/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/funny-opensource-projects/organization/9/website"><img src="https://opencollective.com/funny-opensource-projects/organization/9/avatar.svg"></a>
