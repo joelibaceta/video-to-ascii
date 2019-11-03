@@ -111,6 +111,8 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 
 Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/funny-opensource-projects/contribute)]
 
+Or maybe just [buy me a coffe](ko-fi.com/joelibaceta)
+
 #### Individuals
 
 <a href="https://opencollective.com/funny-opensource-projects"><img src="https://opencollective.com/funny-opensource-projects/individuals.svg?width=890"></a>
@@ -118,8 +120,6 @@ Become a financial contributor and help us sustain our community. [[Contribute](
 #### Organizations
 
 Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/video-to-ascii/contribute)]
-
-Or maybe just [buy me a coffe](ko-fi.com/joelibaceta)
 
 <a href="https://opencollective.com/funny-opensource-projects/organization/0/website"><img src="https://opencollective.com/funny-opensource-projects/organization/0/avatar.svg"></a>
 <a href="https://opencollective.com/funny-opensource-projects/organization/1/website"><img src="https://opencollective.com/funny-opensource-projects/organization/1/avatar.svg"></a>
