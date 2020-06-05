@@ -111,7 +111,7 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 
 Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/funny-opensource-projects/contribute)]
 
-Or maybe just [buy me a coffe](ko-fi.com/joelibaceta)
+Or maybe just [buy me a coffee](ko-fi.com/joelibaceta)
 
 #### Individuals
 
