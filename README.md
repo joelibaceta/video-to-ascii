@@ -29,7 +29,7 @@ Standard installation
 ```bash
 pip3 install video-to-ascii
 ```
-With audio support installtion
+With audio support installation
 ```bash
 pip3 install video-to-ascii --install-option="--with-audio"
 ```
@@ -45,12 +45,12 @@ $ video-to-ascii -f myvideo.mp4
 ### Options
 
 **--strategy**
-Allow to choose an strategy to render the output
+Allow to choose an strategy to render the output.
 
 ![strategies](images/Strategies.png)
 
 **-o --output**
-Export the rendering output to a bash file to share with someone
+Export the rendering output to a bash file to share with someone.
 
 ![strategies](images/export.png)
 
@@ -109,9 +109,9 @@ This project exists thanks to all the people who contribute. [[Contribute](CONTR
 
 ### Financial Contributors
 
-Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/funny-opensource-projects/contribute)]
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/funny-opensource-projects/contribute)].
 
-Or maybe just [buy me a coffee](ko-fi.com/joelibaceta)
+Or maybe just [buy me a coffee](ko-fi.com/joelibaceta).
 
 #### Individuals
 
