@@ -132,7 +132,7 @@ class AsciiStrategy(re.RenderStrategy):
                 resized_frame = self.resize_frame(frame, (cols, rows))
                 # convert frame pixels to colored string
                 msg = self.convert_frame_pixels_to_ascii(resized_frame, (cols, rows)) 
-                t1 = time.clock()
+                t1 = time.process_time()
                 delta = time_delta - (t1 - t0)
                 if delta > 0:
                     time.sleep(delta)
