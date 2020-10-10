@@ -1,5 +1,5 @@
 """
-This module contains a class AsciiColorStrategy, o process video frames and build an ascii output
+This module contains a class AsciiColorStrategy, to process video frames and build an ascii output
 """
 
 from . import ascii_strategy as strategy

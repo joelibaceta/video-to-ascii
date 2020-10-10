@@ -1,5 +1,5 @@
 """
-This module contains a class AsciiColorStrategy, o process video frames and build an ascii output
+This module contains a class AsciiColorStrategy, to process video frames and build an ascii output
 """
 
 import time
@@ -67,7 +67,7 @@ class AsciiStrategy(re.RenderStrategy):
         """
         Iterate each video frame to print a set of ascii chars
 
-        This method read each video frame from a opencv video capture
+        This method reads each video frame from a opencv video capture
         resizing the frame and truncate the width if necessary to
         print correcly the final string builded with the method
         convert_frame_pixels_to_ascii.
@@ -163,7 +163,7 @@ class AsciiStrategy(re.RenderStrategy):
         Resize a frame to meet the terminal dimensions
 
         Calculating the output terminal dimensions (cols, rows),
-        we can to get a reduction factor to resize the frame
+        we can get a reduction factor to resize the frame
         according to the height of the terminal mainly
         to print each frame at a time, using all the available rows
 
