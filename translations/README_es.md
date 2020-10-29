@@ -1,10 +1,8 @@
-<center>
+<div align=center>
 
-  ![header](images/logo.svg)
+  ![Logo](../images/logo.svg)
 
-</center>
-
-<p align="center">
+<p>
 
   Es un paquete de Python simple para reproducir videos en una terminal usando caracteres [ASCII](https://en.wikipedia.org/wiki/ASCII).
 
@@ -13,25 +11,40 @@
   [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/joelibaceta/video-to-ascii)
   [![HitCount](http://hits.dwyl.io/joelibaceta/https://github.com/joelibaceta/video-to-ascii.svg)](http://hits.dwyl.io/joelibaceta/https://github.com/joelibaceta/video-to-ascii)
 
+![screenshot](../images/Simpsons.apng)
+
 </p>
 
+</div>
 
+<details><summary><b>Translations</b></summary>
+<p>
 
-![frames](images/Simpsons.apng)
+- [🇺🇸 English](../README.md)
+- [🇪🇸 Español](./README_es.md)
+- [🇹🇼 繁體中文](./README_zh-TW.md)
+
+<p>
+</details>
 
 ## Requisitos
+
 - Python3
 - PortAudio (_Solo se requiere para la instalación con soporte de audio_)
 - FFmpeg (_Solo se requiere para la instalación con soporte de audio_)
 
 ## Instalación
+
 Instalación estándar
+
 ```bash
-pip3 install video-to-ascii
+$ pip3 install video-to-ascii
 ```
+
 Instalación con soporte de audio
+
 ```bash
-pip3 install video-to-ascii --install-option="--with-audio"
+$ pip3 install video-to-ascii --install-option="--with-audio"
 ```
 
 ## Cómo usarlo
@@ -44,40 +57,40 @@ $ video-to-ascii -f myvideo.mp4
 
 ### Opciones
 
-**--strategy**
+**`--strategy`**
 Permite elegir una estrategia para renderizar la salida.
 
-![strategies](images/Strategies.png)
+![Render Strategies](./images/Strategies.png)
 
-**-o --output**
+**`-o --output`**
 Exporte la salida de renderizado a un archivo bash para compartir con alguien.
 
-![strategies](images/export.png)
+![Exporting](./images/export.png)
 
-**-a --with-audio**
+**`-a --with-audio`**
 Si se realizó una instalación con soporte de audio, puede usar esta opción para reproducir la pista de audio mientras renderiza los caracteres ascii del video.
-<br/>
 
 ## Cómo funciona
 
 Cada video está compuesto por un conjunto de fotogramas que se reproducen a una determinada velocidad de fotogramas.
 
-![frames](images/imgVideoFrames.png)
+![Video Frames](../images/imgVideoFrames.png)
 
 Dado que un terminal tiene un número específico de filas y columnas, tenemos que cambiar el tamaño de nuestro video para ajustarlo a las limitaciones de tamaño del terminal.
 
-![frames](images/imgTerminal.png)
+![Terminal](../images/imgTerminal.png)
 
 Para alcanzar una visualización correcta de un marco completo, necesitamos ajustar la _frame height_ para que coincida con las _terminal rows_, evitando usar más _caracteres_ que el número de _terminal columns_.
 
-![frames](images/imgResizing.png)
+![Resizing](../images/imgResizing.png)
 
 Al elegir un carácter para representar un píxel, necesitamos medir la relevancia del color de ese píxel en el marco, en base a eso podemos seleccionar el carácter más apropiado en función de la [luminancia relativa](https://en.wikipedia.org/wiki/Relative_luminance) en los espacios colorimétricos, usando una versión simplificada de la función de luminosidad .
 
-![LuminosityFunction](images/Luminosity.svg)
+<p align="center">
+  <img src="../images/Luminosity.svg">
+</p>
 
 > La luz verde es la que más contribuye a la intensidad percibida por los humanos y la luz azul, la que menos.
-
 
 Esta función devuelve un número entero en el rango de 0 a 255, asignamos un carácter según la densidad para mostrar la superficie más coloreada para las áreas con color más intenso (valores más altos).
 
@@ -87,47 +100,46 @@ CHARS_COLOR 	= ['.', '*', 'e', 's', '@']
 CHARS_FILLED    = ['░', '▒', '▓', '█']
 ```
 
-<br/>
-
 La reducida gama de colores que admite el terminal es un problema que debemos tener en cuenta. Los terminales modernos admiten hasta 256 colores, por lo que necesitamos encontrar el color de 8 bits más cercano que coincida con el píxel original en color de 16 o 24 bits, a este conjunto de [colores ANSI](https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences) de 256 colores lo llamamos.
 
-![frames](images/imgPixelSection.png)
+![The Mapping of RGB and ANSI Colors](../images/imgPixelSection.png)
 
-![colors](images/8-bit_color_table.png)
+![8 Bits Color Table](../images/8-bit_color_table.png)
 
 Finalmente, al ponerlo todo junto, tendremos un carácter apropiado para cada píxel y un nuevo color.
 
-![frames](images/imgPixelImage.png)
-
+![Frame Image by Characters](../images/imgPixelImage.png)
 
 ## Contribuyentes
 
 ### Contribuyentes de Código
 
-Este proyecto existe gracias a todas las personas que contribuyen. [[Contribuir](CONTRIBUTING.md)].
-<a href="https://github.com/joelibaceta/video-to-ascii/graphs/contributors"><img src="https://opencollective.com/funny-opensource-projects/contributors.svg?width=890&button=false" /></a>
+Este proyecto existe gracias a todas las personas que contribuyen. [[Contribute](../CONTRIBUTING.md)].
+
+<a href="https://github.com/joelibaceta/video-to-ascii/graphs/contributors"><img src="https://opencollective.com/video-to-ascii/contributors.svg?width=890&button=false" /></a>
 
 ### Contribuyentes Financieros
 
-Conviértete en un contribuyente financiero y ayúdanos a sostener nuestra comunidad.. [[Contribuir](https://opencollective.com/funny-opensource-projects/contribute)].
+Conviértete en un contribuyente financiero y ayúdanos a sostener nuestra comunidad.. [[Contribute](https://opencollective.com/video-to-ascii/contribute/)].
 
-O tal vez sólo me [compre un café](ko-fi.com/joelibaceta).
+O tal vez sólo me [compre un café](https://ko-fi.com/joelibaceta).
 
 #### Individuos
 
-<a href="https://opencollective.com/funny-opensource-projects"><img src="https://opencollective.com/funny-opensource-projects/individuals.svg?width=890"></a>
+<a href="https://opencollective.com/video-to-ascii#backers" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/individuals.svg?width=890"></a>
 
 #### Organizaciones
 
-Apoye este proyecto con su organización. Su logotipo se mostrará aquí con un enlace a su sitio web. [[Contribuir](https://opencollective.com/video-to-ascii/contribute)]
+Apoye este proyecto con su organización. Su logotipo se mostrará aquí con un enlace a su sitio web. [[Contribute](https://opencollective.com/video-to-ascii/contribute)]
 
-<a href="https://opencollective.com/funny-opensource-projects/organization/0/website"><img src="https://opencollective.com/funny-opensource-projects/organization/0/avatar.svg"></a>
-<a href="https://opencollective.com/funny-opensource-projects/organization/1/website"><img src="https://opencollective.com/funny-opensource-projects/organization/1/avatar.svg"></a>
-<a href="https://opencollective.com/funny-opensource-projects/organization/2/website"><img src="https://opencollective.com/funny-opensource-projects/organization/2/avatar.svg"></a>
-<a href="https://opencollective.com/funny-opensource-projects/organization/3/website"><img src="https://opencollective.com/funny-opensource-projects/organization/3/avatar.svg"></a>
-<a href="https://opencollective.com/funny-opensource-projects/organization/4/website"><img src="https://opencollective.com/funny-opensource-projects/organization/4/avatar.svg"></a>
-<a href="https://opencollective.com/funny-opensource-projects/organization/5/website"><img src="https://opencollective.com/funny-opensource-projects/organization/5/avatar.svg"></a>
-<a href="https://opencollective.com/funny-opensource-projects/organization/6/website"><img src="https://opencollective.com/funny-opensource-projects/organization/6/avatar.svg"></a>
-<a href="https://opencollective.com/funny-opensource-projects/organization/7/website"><img src="https://opencollective.com/funny-opensource-projects/organization/7/avatar.svg"></a>
-<a href="https://opencollective.com/funny-opensource-projects/organization/8/website"><img src="https://opencollective.com/funny-opensource-projects/organization/8/avatar.svg"></a>
-<a href="https://opencollective.com/funny-opensource-projects/organization/9/website"><img src="https://opencollective.com/funny-opensource-projects/organization/9/avatar.svg"></a>
+<a href="https://opencollective.com/video-to-ascii/organization/0/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/video-to-ascii/organization/1/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/video-to-ascii/organization/2/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/video-to-ascii/organization/3/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/video-to-ascii/organization/4/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/video-to-ascii/organization/5/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/video-to-ascii/organization/6/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/video-to-ascii/organization/7/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/video-to-ascii/organization/8/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/video-to-ascii/organization/9/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/9/avatar.svg"></a>
+

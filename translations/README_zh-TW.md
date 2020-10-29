@@ -1,10 +1,10 @@
 <div align=center>
 
-  ![Logo](./images/logo.svg)
+  ![Logo](../images/logo.svg)
 
 <p>
 
-  It's a simple python package to play videos in a terminal using [ASCII](https://en.wikipedia.org/wiki/ASCII) characters.
+  一款用來在終端機中使用 [ASCII](https://en.wikipedia.org/wiki/ASCII) 字元播放影片的 Python 套件。
 
   [![Financial Contributors on Open Collective](https://opencollective.com/video-to-ascii/all/badge.svg?label=financial+contributors)](https://opencollective.com/video-to-ascii) [![PyPI version](https://badge.fury.io/py/video-to-ascii.svg)](https://badge.fury.io/py/video-to-ascii)
   [![Maintainability](https://api.codeclimate.com/v1/badges/a5fcdf2b0cab41654ca3/maintainability)](https://codeclimate.com/github/joelibaceta/video-to-terminal/maintainability)
@@ -13,86 +13,88 @@
 
 </p>
 
-![Screenshot](./images/Simpsons.apng)
+![Screenshot](../images/Simpsons.apng)
 
 </div>
 
-<details><summary><b>Translations</b></summary>
+<details><summary><b>文件翻譯</b></summary>
 <p>
 
-- [🇺🇸 English](./README.md)
-- [🇪🇸 Español](./translations/README_es.md)
-- [🇹🇼 繁體中文](./translations/README_zh-TW.md)
+- [🇺🇸 English](../README.md)
+- [🇪🇸 Español](./README_es.md)
+- [🇹🇼 繁體中文](./README_zh-TW.md)
 
 <p>
 </details>
 
-## Requirements
+## 使用需求
 
 - Python3
-- PortAudio (_Only required for installation with audio support_)
-- FFmpeg (_Only required for installation with audio support_)
+- PortAudio (_僅用來提供音訊功能的安裝支持_)
+- FFmpeg (_僅用來提供音訊功能的安裝支持_)
 
-## Installation
+## 安裝方式
 
-Standard installation
+標準安裝：
 
 ```bash
 $ pip3 install video-to-ascii
 ```
 
-With audio support installation
+安裝時添加音訊功能：
 
 ```bash
 $ pip3 install video-to-ascii --install-option="--with-audio"
 ```
 
-## How to use
+## 使用指南
 
-Just run `video-to-ascii` in your terminal
+只需要在你的終端機中執行 `video-to-ascii` 命令：
 
 ```bash
 $ video-to-ascii -f myvideo.mp4
 ```
 
-### Options
+### 選項
 
 **`--strategy`**
-Allow to choose an strategy to render the output.
 
-![Render Strategies](./images/Strategies.png)
+允許選擇影片輸出時的渲染策略。
 
-**`-o --output`**
-Export the rendering output to a bash file to share with someone.
+![Render Strategies](../images/Strategies.png)
 
-![Exporting](./images/export.png)
+**`-o --output`** 匯出影片渲染後的輸出結果為腳本檔案，用以分享給他人使用。
+
+![Exporting](../images/export.png)
 
 **`-a --with-audio`**
-If an installation with audio support was made, you can use this option to play the audio track while rendering the video ascii characters.
 
-## How it works
+如果安裝時帶有音訊功能，你可以使用這個選項來在透過 ASCII 字元渲染影片時播放音訊。
 
-Every video is composed by a set of frames that are played at a certain frame rate.
+## 如何運作
 
-![Video Frames](./images/imgVideoFrames.png)
+任何的影片皆由一系列的影格（或稱為幀，frames）所組成，並透過特定的幀率（frame rate）進行播放。
 
-Since a terminal has a specific number of rows and columns, we have to resize our video to adjust to the terminal size limitations.
+![Video Frames](../images/imgVideoFrames.png)
 
-![Terminal](./images/imgTerminal.png)
+由於終端機有特定的行數與列數，我們必須調整影片大小來適配終端機的大小限制。
 
-To reach a correct visualization of an entire frame we need to adjust the _frame height_ to match the _terminal rows_, avoiding using more _characters_ than the number of _terminal columns_.
+![Terminal](../images/imgTerminal.png)
 
-![Resizing](./images/imgResizing.png)
+為了使每一個完整影格能夠正確地被視覺化，我們必須調整 _影格高度（frame height）_ 來適配 _終端行數（terminal rows）_，並避免使用超出 _終端列數（terminal columns）_ 的 _字元（characters）_。
 
-When picking a character to represent a pixel we need to measure the relevance of that pixel's color in the frame, based on that we can then select the most appropriate character based on the [relative luminance](https://en.wikipedia.org/wiki/Relative_luminance) in colorimetric spaces, using a simplify version of the luminosity function.
+![Resizing](../images/imgResizing.png)
+
+在選擇一個字元（character）來表示一個像素（pixel）時，我們需要測量該像素顏色在影格中的相關性，並使用簡化版本的光度函數（luminosity function）來根據色度空間中的 [相對發光亮度（relative luminance）](https://en.wikipedia.org/wiki/Relative_luminance) 選擇最適當的字元。
 
 <p align="center">
-  <img src="./images/Luminosity.svg">
+  <img src="../images/Luminosity.svg">
 </p>
 
-> Green light contributes the most to the intensity perceived by humans, and blue light the least.
+> 綠光對於人體的視覺強度感知最高，而藍光最少。
 
-This function returns an integer in the range from 0 to 255, we assign a character according to density to show more colored surface for areas with more intense color (highest values).
+這個函數會返回一個介於 0 到 255 之間的整數，我們根據密度分配字元，用以在色彩感知度較高（較高的數值）的區塊顯示較大的塗色區塊。
+顯示顏色較深區域的
 
 ```python
 CHARS_LIGHT 	= [' ', ' ', '.', ':', '!', '+', '*', 'e', '$', '@', '8']
@@ -100,37 +102,37 @@ CHARS_COLOR 	= ['.', '*', 'e', 's', '@']
 CHARS_FILLED    = ['░', '▒', '▓', '█']
 ```
 
-The reduced range of colors supported by the terminal is a problem we need to account for. Modern terminals support up to 256 colors, so we need to find the closest 8 bit color that matches the original pixel in 16 or 24 bit color, we call this set of 256 colors [ANSI colors](https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences).
+終端機所能支援的色彩範圍是我們需要解決的問題。現代的終端機最多支援 256 色，因此我們需要找到與原來像素的 16 位元顏色或 24 位元顏色最接近的 8 位元顏色，我們稱這 256 個顏色為 [ANSI 色](https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences)。
 
-![The Mapping of RGB and ANSI Colors](./images/imgPixelSection.png)
+![The Mapping of RGB and ANSI Colors](../images/imgPixelSection.png)
 
-![8 Bits Color Table](./images/8-bit_color_table.png)
+![8 Bits Color Table](../images/8-bit_color_table.png)
 
-Finally, when putting it all together, we will have an appropriate character for each pixel and a new color.
+最後，我們便可以得到對於每個像素而言最適當的字元與色彩。
 
 ![Frame Image by Characters](../images/imgPixelImage.png)
 
-## Contributors
+## 貢獻者
 
-### Code Contributors
+### 程式貢獻者
 
-This project exists thanks to all the people who contribute. [[Contribute](./CONTRIBUTING.md)].
+這個項目的存在要感謝所有貢獻者。[[Contribute](../CONTRIBUTING.md)].
 
 <a href="https://github.com/joelibaceta/video-to-ascii/graphs/contributors"><img src="https://opencollective.com/video-to-ascii/contributors.svg?width=890&button=false" /></a>
 
-### Financial Contributors
+### 財務貢獻者
 
-Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/video-to-ascii/contribute/)].
+成為財務貢獻者，並幫助我們維持我們的社群。[[Contribute](https://opencollective.com/video-to-ascii/contribute/)].
 
-Or maybe just [buy me a coffee](https://ko-fi.com/joelibaceta).
+或者是 [贊助我一杯咖啡](https://ko-fi.com/joelibaceta)。
 
-#### Individuals
+#### 個人贊助
 
 <a href="https://opencollective.com/video-to-ascii#backers" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/individuals.svg?width=890"></a>
 
-#### Organizations
+#### 機構贊助
 
-Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/video-to-ascii/contribute)]
+與您的組織一起支持此項目。您的組織徽章將顯示在此處，並帶有指向您網站的鏈接。[[Contribute](https://opencollective.com/video-to-ascii/contribute)]
 
 <a href="https://opencollective.com/video-to-ascii/organization/0/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/0/avatar.svg"></a>
 <a href="https://opencollective.com/video-to-ascii/organization/1/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/1/avatar.svg"></a>
