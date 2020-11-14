@@ -115,9 +115,7 @@ class AsciiStrategy(re.RenderStrategy):
         sys.stdout.write("echo -en '\033[2J' \n")
         # read each frame
         while cap.isOpened():
-
-
-            t0 = time.clock()
+            t0 = time.process_time()
             rows, cols = os.popen('stty size', 'r').read().split()
             _ret, frame = cap.read()
             if frame is None:
