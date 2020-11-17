@@ -7,7 +7,7 @@ from setuptools.command.egg_info import egg_info
 def install_package(package):
     import pip
     from pip._internal import main
-    main.main(['install', package])
+    main(['install', package])
 
 if "--with-audio" in sys.argv:
     install_package('opencv-python')
