@@ -83,7 +83,8 @@ class AsciiStrategy(re.RenderStrategy):
         v_width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
         v_height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         length = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-        fps = cap.get(cv2.CAP_PROP_FPS)
+        fps = cap.get(cv2.CAP_PROP_FPS) 
+        fps = fps or 30
 
         if with_audio:
             import pyaudio
