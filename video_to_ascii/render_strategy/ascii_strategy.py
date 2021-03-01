@@ -6,12 +6,31 @@ import time
 import sys
 import os
 import cv2
-import tempfile 
+import tempfile
 
 from . import render_strategy as re
 from . import image_processor as ipe
 
 DEFAULT_TERMINAL_SIZE = 80, 25
+
+if os.name == "nt":
+    from struct import unpack
+    from ctypes import windll, create_string_buffer
+
+    def _get_terminal_size_windows():
+        # stdin  handle is -10
+        # stdout handle is -11
+        # stderr handle is -12
+        h = windll.kernel32.GetStdHandle(-12)
+        csbi = create_string_buffer(22)
+        res = windll.kernel32.GetConsoleScreenBufferInfo(h, csbi)
+        if res:
+            (bufx, bufy, curx, cury, wattr, left, top, right, bottom, maxx, maxy) = unpack("hhhhHhhhhhh", csbi.raw)
+            sizex = right - left + 1
+            sizey = bottom - top + 1
+            return sizex, sizey
+        else:
+            return DEFAULT_TERMINAL_SIZE
 
 class AsciiStrategy(re.RenderStrategy):
     """Print each frame in the terminal using ascii characters"""
@@ -54,7 +73,12 @@ class AsciiStrategy(re.RenderStrategy):
                 msg += "\n"
             else:
                 msg += " " * (pad)
-        msg += "\r\n"
+
+        if os.name == "nt":
+            msg += "\r"
+        else:
+            msg += "\r\n"
+
         return msg
 
     def apply_pixel_to_ascii_strategy(self, pixel):
@@ -117,7 +141,12 @@ class AsciiStrategy(re.RenderStrategy):
         # read each frame
         while cap.isOpened():
             t0 = time.process_time()
-            rows, cols = os.popen('stty size', 'r').read().split()
+
+            if os.name == "nt":
+                cols, rows = _get_terminal_size_windows()
+            else:
+                rows, cols = os.popen('stty size', 'r').read().split()
+
             _ret, frame = cap.read()
             if frame is None:
                 break
