@@ -10,8 +10,8 @@ import tempfile
 
 from . import render_strategy as re
 from . import image_processor as ipe
-
-DEFAULT_TERMINAL_SIZE = 80, 25
+from os import get_terminal_size as _term_size
+DEFAULT_TERMINAL_SIZE = _term_size().columns, _term_size().lines
 
 class AsciiStrategy(re.RenderStrategy):
     """Print each frame in the terminal using ascii characters"""
