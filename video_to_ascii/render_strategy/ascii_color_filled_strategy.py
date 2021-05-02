@@ -18,4 +18,4 @@ class AsciiColorFilledStrategy(strategy.AsciiStrategy):
         Returns:
             str: The resulting set of colored chars as a unique string
         """
-        return ipe.pixel_to_ascii(pixel, colored=False)
+        return ipe.pixel_to_ascii(pixel, density=2)
