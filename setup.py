@@ -22,7 +22,7 @@ else:
 
 setup(
     name="video_to_ascii",
-    version="1.2.9",
+    version="1.3.0",
     author="Joel Ibaceta",
     author_email="mail@joelibaceta.com",
     license='MIT',
