@@ -109,7 +109,7 @@ The reduced range of colors supported by the terminal is a problem we need to ac
 
 Finally, when putting it all together, we will have an appropriate character for each pixel and a new color.
 
-![Frame Image by Characters](../images/imgPixelImage.png)
+![Frame Image by Characters](./images/imgPixelImage.png)
 
 ## Contributors
 
