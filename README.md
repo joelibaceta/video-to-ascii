@@ -59,7 +59,7 @@ $ video-to-ascii -f myvideo.mp4
 ### Options
 
 **`--strategy`**
-Allow to choose an strategy to render the output.
+Allow to choose a strategy to render the output.
 
 ![Render Strategies](./images/Strategies.png)
 
@@ -85,7 +85,7 @@ To reach a correct visualization of an entire frame we need to adjust the _frame
 
 ![Resizing](./images/imgResizing.png)
 
-When picking a character to represent a pixel we need to measure the relevance of that pixel's color in the frame, based on that we can then select the most appropriate character based on the [relative luminance](https://en.wikipedia.org/wiki/Relative_luminance) in colorimetric spaces, using a simplify version of the luminosity function.
+When picking a character to represent a pixel we need to measure the relevance of that pixel's color in the frame, based on that we can then select the most appropriate character based on the [relative luminance](https://en.wikipedia.org/wiki/Relative_luminance) in colorimetric spaces, using a simplified version of the luminosity function.
 
 <p align="center">
   <img src="./images/Luminosity.svg">

@@ -5,7 +5,7 @@ from . import player
 def main():
     import argparse
 
-    CLI_DESC = "It is a simple python package to play videos in the terminal using colored characters as pixels or other usefull outputs"
+    CLI_DESC = "It is a simple python package to play videos in the terminal using colored characters as pixels or other useful outputs"
     EPILOG = ("\033[1;37mThanks for trying video-to-ascii!\033[0m")
 
     PARSER = argparse.ArgumentParser(prog='video-to-ascii', description=CLI_DESC, epilog=EPILOG)

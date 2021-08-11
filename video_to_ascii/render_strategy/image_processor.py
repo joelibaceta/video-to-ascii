@@ -1,4 +1,4 @@
-"""Module with usefull functions to image processing"""
+"""Module with useful functions to image processing"""
 
 import colorsys
 from xtermcolor import colorize
@@ -11,7 +11,7 @@ DENSITY = [CHARS_LIGHT, CHARS_COLOR, CHARS_FILLED]
 
 def brightness_to_ascii(i, density=0):
     """
-    Get an apropiate char of brighnes from a rgb color
+    Get an appropriate char of brightness from a rgb color
     """
     chars_collection = DENSITY[density]
     size = len(chars_collection) - 1
@@ -20,7 +20,7 @@ def brightness_to_ascii(i, density=0):
 
 def colorize_char(char, ansi_color):
     """
-    Get an apropiate char of brighnes from a rgb color
+    Get an appropriate char of brightness from a rgb color
     """
     str_colorized = colorize(char, ansi=ansi_color)
     return str_colorized
@@ -54,7 +54,7 @@ def increase_saturation(r, g, b):
 
 def rgb_to_brightness(r, g, b, grayscale=False):
     """
-    Calc a brighness factor according to rgb color
+    Calc a brightness factor according to rgb color
     """
     if grayscale:
         return 0.2126*r + 0.7152*g + 0.0722*b

@@ -18,7 +18,7 @@ class AsciiStrategy(re.RenderStrategy):
 
     def convert_frame_pixels_to_ascii(self, frame, dimensions=DEFAULT_TERMINAL_SIZE, new_line_chars=False):
         """
-        Replace all pixeles with colored chars and return the resulting string
+        Replace all pixels with colored chars and return the resulting string
 
         This method iterates each pixel of one video frame
         respecting the dimensions of the printing area
@@ -69,7 +69,7 @@ class AsciiStrategy(re.RenderStrategy):
 
         This method reads each video frame from a opencv video capture
         resizing the frame and truncate the width if necessary to
-        print correcly the final string builded with the method
+        print correctly the final string built with the method
         convert_frame_pixels_to_ascii.
         Finally each final string is printed correctly, if the process
         was done too fast will sleep the necessary time to comply
