@@ -3,7 +3,11 @@ This module contains a class AsciiColorStrategy, to process video frames and bui
 """
 
 from . import ascii_strategy as strategy
-from . import image_processor as ipe
+import sys
+if sys.platform != 'win32':
+    from . import image_processor as ipe
+else:
+    from . import image_processor_win as ipe
 
 class AsciiBWStrategy(strategy.AsciiStrategy):
     """Print each frame in the terminal using one color ascii characters"""
