@@ -50,7 +50,6 @@ def pixel_to_ascii(pixel, colored=True, density=0):
         rgb = increase_saturation(*rgb)
         char = brightness_to_ascii(bright, density)
         hex_color = rgb_to_colorhex(*rgb)
-##        print("===\n"+hex_color+"\n===\n")
         char = fg(hex_color)+char*2+attr('reset')
     else:
         bright = rgb_to_brightness(*rgb, grayscale=True)
@@ -74,22 +73,3 @@ def rgb_to_brightness(r, g, b, grayscale=False):
         return 0.2126*r + 0.7152*g + 0.0722*b
     else:
         return 0.267*r + 0.642*g + 0.091*b
-
-##def rgb_to_ansi(r, g, b):
-##    """
-##    Convert an rgb color to ansi color
-##    """
-##    (r, g, b) = int(r), int(g), int(b)
-##    if r == g & g == b:
-##        if r < 8:
-##            return int(16)
-##        if r > 248:
-##            return int(230)
-##        return int(round(((r - 8) / 247) * 24) + 232)
-##
-##    to_ansi_range = lambda a: int(round(a / 51.0))
-##    r_in_range = to_ansi_range(r)
-##    g_in_range = to_ansi_range(g)
-##    b_in_range = to_ansi_range(b)
-##    ansi = 16 + (36 * r_in_range) + (6 * g_in_range) + b_in_range
-##    return int(ansi)
