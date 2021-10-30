@@ -8,8 +8,15 @@ import os
 import cv2
 import tempfile 
 
+PLATFORM = 0
+if sys.platform != 'win32':
+    PLATFORM = 1
+
 from . import render_strategy as re
-from . import image_processor as ipe
+if PLATFORM:
+    from . import image_processor as ipe
+else:
+    from . import image_processor_win as ipe
 from os import get_terminal_size as _term_size
 DEFAULT_TERMINAL_SIZE = _term_size().columns, _term_size().lines
 
@@ -113,11 +120,17 @@ class AsciiStrategy(re.RenderStrategy):
 
         time_delta = 1./fps
         counter=0
-        sys.stdout.write("echo -en '\033[2J' \n")
+        if PLATFORM:
+            sys.stdout.write("echo -en '\033[2J' \n")
+        else:
+            sys.stdout.write('\033[2J')
         # read each frame
         while cap.isOpened():
             t0 = time.process_time()
-            rows, cols = os.popen('stty size', 'r').read().split()
+            if PLATFORM:
+                rows, cols = os.popen('stty size', 'r').read().split()
+            else:
+                cols, rows = os.get_terminal_size()
             _ret, frame = cap.read()
             if frame is None:
                 break
@@ -126,7 +139,10 @@ class AsciiStrategy(re.RenderStrategy):
                 stream.write(data)
             # sleep if the process was too fast
             if output is None:
-                sys.stdout.write('\u001b[0;0H')
+                if PLATFORM:
+                    sys.stdout.write('\u001b[0;0H')
+                else:
+                    sys.stdout.write("\x1b[0;0H")
                 # scale each frame according to terminal dimensions
                 resized_frame = self.resize_frame(frame, (cols, rows))
                 # convert frame pixels to colored string
@@ -138,7 +154,10 @@ class AsciiStrategy(re.RenderStrategy):
                 sys.stdout.write(msg) # Print the final string
             else:
                 print(self.build_progress(counter, length))
-                print("\u001b[2A")
+                if PLATFORM:
+                    print("\u001b[2A")
+                else:
+                    print("\x1b[2A")
                 resized_frame = self.resize_frame(frame)
                 msg = self.convert_frame_pixels_to_ascii(resized_frame, new_line_chars=True)
                 file.write("sleep 0.033 \n")
@@ -147,8 +166,11 @@ class AsciiStrategy(re.RenderStrategy):
             counter += 1
         if with_audio:
             stream.close()
-            p.terminate() 
-        sys.stdout.write("echo -en '\033[2J' \n")
+            p.terminate()
+        if PLATFORM:
+            sys.stdout.write("echo -en '\033[2J' \n")
+        else:
+            os.system('cls') or None
 
     def build_progress(self, progress, total):
         """Build a progress bar in the terminal"""
