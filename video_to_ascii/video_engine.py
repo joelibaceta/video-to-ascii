@@ -28,11 +28,12 @@ class VideoEngine:
         cap = cv2.VideoCapture(filename)
         self.read_buffer = cap
 
-    def play(self, file=None):
+    def play(self, output=None, output_format=None):
         """
         Play the video captured using an specific render strategy
         """
         
         self.render_strategy.render(self.read_buffer, 
-            output=file, 
+            output=output, 
+            output_format=output_format, 
             with_audio=self.with_audio)
