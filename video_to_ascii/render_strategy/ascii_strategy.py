@@ -70,7 +70,7 @@ class AsciiStrategy(re.RenderStrategy):
     def apply_end_line_modifier(self, msg):
         return msg
 
-    def render(self, cap, output=None, with_audio=False):
+    def render(self, cap, output=None, output_format=None, with_audio=False):
         """
         Iterate each video frame to print a set of ascii chars
 
@@ -114,9 +114,11 @@ class AsciiStrategy(re.RenderStrategy):
 
         if output is not None:
             file = open(output, 'w+')
-            file.write("#!/bin/bash \n")
-            file.write("echo -en '\033[2J' \n")
-            file.write("echo -en '\u001b[0;0H' \n")
+
+            if output_format == 'sh':
+                file.write("#!/bin/bash \n")
+                file.write("echo -en '\033[2J' \n")
+                file.write("echo -en '\u001b[0;0H' \n")
 
         time_delta = 1./fps
         counter=0
@@ -158,11 +160,27 @@ class AsciiStrategy(re.RenderStrategy):
                     print("\u001b[2A")
                 else:
                     print("\x1b[2A")
-                resized_frame = self.resize_frame(frame)
-                msg = self.convert_frame_pixels_to_ascii(resized_frame, new_line_chars=True)
-                file.write("sleep 0.033 \n")
-                file.write("echo -en '" + msg + "'" + "\n" ) 
-                file.write("echo -en '\u001b[0;0H' \n")
+
+                if output_format == 'sh':
+                    resized_frame = self.resize_frame(frame)
+                    msg = self.convert_frame_pixels_to_ascii(resized_frame, new_line_chars=True)
+                    file.write("sleep 0.033 \n")
+                    file.write("echo -en '" + msg + "'" + "\n" ) 
+                    file.write("echo -en '\u001b[0;0H' \n")
+                elif output_format == 'json':
+                    # scale each frame according to terminal dimensions
+                    resized_frame = self.resize_frame(frame, (cols, rows))
+                    msg = self.convert_frame_pixels_to_ascii(resized_frame, (cols, rows), new_line_chars=True)
+                    lines = msg.split("\n")
+                    # remove last line breaks (\n\r) which generate two extra unwanted array elements
+                    lines = lines[0:-2]
+                    # opening brackets
+                    file.write("[[\n" if counter == 0  else ",[\n")
+                    for i in range(len(lines)):
+                        file.write(f"\"{lines[i]}\"")
+                        # closing brackets
+                        file.write("]\n" if i == (len(lines) - 1)  else ",\n")
+
             counter += 1
         if with_audio:
             stream.close()
@@ -171,6 +189,10 @@ class AsciiStrategy(re.RenderStrategy):
             sys.stdout.write("echo -en '\033[2J' \n")
         else:
             os.system('cls') or None
+
+        # close the frame array
+        if output is not None and output_format == 'json':
+            file.write(f"]\n")
 
     def build_progress(self, progress, total):
         """Build a progress bar in the terminal"""

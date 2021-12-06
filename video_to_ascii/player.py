@@ -3,7 +3,7 @@
 import tempfile
 from . import video_engine as ve
 
-def play(filename, strategy=None, output=None, play_audio=False):
+def play(filename, strategy=None, output=None, output_format=None, play_audio=False):
     """
     Play or export a video from a file by default using ascii chars in terminal
     """
@@ -20,4 +20,4 @@ def play(filename, strategy=None, output=None, play_audio=False):
         engine.with_audio = True
     if strategy is not None:
         engine.set_strategy(strategy)
-    engine.play(output)
+    engine.play(output, output_format)
