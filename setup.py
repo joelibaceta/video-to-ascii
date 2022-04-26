@@ -8,7 +8,7 @@ def install_package(package):
     import pip
     try:
         from pip._internal import main
-        main.main(['install', package])
+        main(['install', package])
     except AttributeError:
         from pip import __main__
         __main__._main(['install', package])
