@@ -11,7 +11,7 @@ def install_package(package):
         main.main(['install', package])
     except AttributeError:
         from pip import __main__
-        __main__._main(['install', package])
+        __main__(['install', package])
 
 if "--with-audio" in sys.argv:
     install_package('opencv-python')
