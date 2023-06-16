@@ -4,11 +4,11 @@
 
 <p>
 
-  É um simples pacote de python para rodar videos no terminal usando caracteres [ASCII](https://en.wikipedia.org/wiki/ASCII).
+  It's a simple python package to play videos in a terminal using [ASCII](https://en.wikipedia.org/wiki/ASCII) characters.
 
-  [![Contribuidores financeiros no Open Collective](https://opencollective.com/video-to-ascii/all/badge.svg?label=financial+contributors)](https://opencollective.com/video-to-ascii) [![PyPI version](https://badge.fury.io/py/video-to-ascii.svg)](https://badge.fury.io/py/video-to-ascii)
-  [![Manutenibilidade](https://api.codeclimate.com/v1/badges/3108b26a0bcfffd4b4fe/maintainability)](https://codeclimate.com/github/joelibaceta/video-to-ascii/maintainability)
-  [![constribuições bem-vindas](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/joelibaceta/video-to-ascii)
+  [![Financial Contributors on Open Collective](https://opencollective.com/video-to-ascii/all/badge.svg?label=financial+contributors)](https://opencollective.com/video-to-ascii) [![PyPI version](https://badge.fury.io/py/video-to-ascii.svg)](https://badge.fury.io/py/video-to-ascii)
+  [![Maintainability](https://api.codeclimate.com/v1/badges/3108b26a0bcfffd4b4fe/maintainability)](https://codeclimate.com/github/joelibaceta/video-to-ascii/maintainability)
+  [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/joelibaceta/video-to-ascii)
 
 </p>
 
@@ -16,84 +16,83 @@
 
 </div>
 
-<details><summary><b>Traduções</b></summary>
+<details><summary><b>Translations</b></summary>
 <p>
 
 - [🇺🇸 English](./README.md)
 - [🇪🇸 Español](./translations/README_es.md)
 - [🇹🇼 繁體中文](./translations/README_zh-TW.md)
-- [pt-BR Português](./translations/README_pt-BR.md)
 
 <p>
 </details>
 
-## Requisitos
+## Requirements
 
 - Python3
-- PortAudio (_Necessário somente para instalação com suporte de áudio_)
-- FFmpeg (_Necessário somente para instalação com suporte de áudio_)
-- Linux ou MacOS ... por agora
+- PortAudio (_Only required for installation with audio support_)
+- FFmpeg (_Only required for installation with audio support_)
+- Linux or MacOS ... by now
 
-## Instalação
+## Installation
 
-Instalação padrão
+Standard installation
 
 ```bash
 $ pip3 install video-to-ascii
 ```
 
-Instalação com suporte de áudio
+With audio support installation
 
 ```bash
 $ pip3 install video-to-ascii --install-option="--with-audio"
 ```
 
-## Como usar
+## How to use
 
-Apenas execute `video-to-ascii` em seu terminal
+Just run `video-to-ascii` in your terminal
 
 ```bash
 $ video-to-ascii -f myvideo.mp4
 ```
 
-### Opções
+### Options
 
 **`--strategy`**
-Permite escolher a estratégia para renderizar a saída.
+Allow to choose a strategy to render the output.
 
 ![Render Strategies](./images/Strategies.png)
 
 **`-o --output`**
-Exporta a saída renderizada para um arquivo bash para compartilhar com alguém.
+Export the rendering output to a bash file to share with someone.
 
-![Exportando](./images/export.png)
+![Exporting](./images/export.png)
 
 **`-a --with-audio`**
-Se foi feita a instalação com suporte de áudio, você pode usar essa opção para rodar a trilha de áudio enquanto o video renderiza os caracteres em ASCII.
+If an installation with audio support was made, you can use this option to play the audio track while rendering the video ascii characters.
 
-## Como funciona
+## How it works
 
-Todo video é composto por um número de frames que são executados em uma certa taxa de frames.
+Every video is composed by a set of frames that are played at a certain frame rate.
 
 ![Video Frames](./images/imgVideoFrames.png)
 
-Uma vez que o terminal tem um número específico de linhas e colunas, nós temos que redimensionar o vídeo para ajustar as limitações da tela do terminal.
+Since a terminal has a specific number of rows and columns, we have to resize our video to adjust to the terminal size limitations.
 
 ![Terminal](./images/imgTerminal.png)
 
-Para chegar a uma visualização correta de todo o frame nós ajustamos a _altura do frame_ para igualar com as _linhas do terminal_, evitando de usar mais _caracteres_ que o número de _colunas do terminal_.
+To reach a correct visualization of an entire frame we need to adjust the _frame height_ to match the _terminal rows_, avoiding using more _characters_ than the number of _terminal columns_.
 
 ![Resizing](./images/imgResizing.png)
 
-Quando um caractere é escolhido para representar um pixel nós temos que medir a relevância da cor desse pixel no frame, baseado nisso nós selecionamos o caractere mais apropriado baseado na [iluminação relativa](https://en.wikipedia.org/wiki/Relative_luminance) em espaços colorimétricos, usando a versão simplificada da função de luminosidade.
+When picking a character to represent a pixel we need to measure the relevance of that pixel's color in the frame, based on that we can then select the most appropriate character based on the [relative luminance](https://en.wikipedia.org/wiki/Relative_luminance) in colorimetric spaces, using a simplified version of the luminosity function.
 
 <p align="center">
   <img src="./images/Luminosity.svg">
 </p>
 
-> A luz verde contribui mais para a intensidade percebida pelos humanos, e a luz azul menos.
+> Green light contributes the most to the intensity perceived by humans, and blue light the least.
 
-Essa função retorna um inteiro no intervalo entre 0 e 255, nós assinamos um caractere de acordo com a densidade para mostrar superfícies mais coloridas para áreas com maiores intensidades de cor (valores maiores).
+This function returns an integer in the range from 0 to 255, we assign a character according to density to show more colored surface for areas with more intense color (highest values).
 
 ```python
 CHARS_LIGHT 	= [' ', ' ', '.', ':', '!', '+', '*', 'e', '$', '@', '8']
@@ -101,37 +100,37 @@ CHARS_COLOR 	= ['.', '*', 'e', 's', '@']
 CHARS_FILLED    = ['░', '▒', '▓', '█']
 ```
 
-O intervalo de cores reduzidas suportadas pelo terminal é um problema que precisamos levar em conta. Terminais modernos suportam até 256 cores, então nós precisamos encontrar a cor 8 bit mais próxima que se assemelha ao pixel original de cor 16 ou 24 bit, nós chamamos esse set de 256 cores de [cores ANSI](https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences).
+The reduced range of colors supported by the terminal is a problem we need to account for. Modern terminals support up to 256 colors, so we need to find the closest 8 bit color that matches the original pixel in 16 or 24 bit color, we call this set of 256 colors [ANSI colors](https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences).
 
 ![The Mapping of RGB and ANSI Colors](./images/imgPixelSection.png)
 
 ![8 Bits Color Table](./images/8-bit_color_table.png)
 
-Finalmente, quando colocamos isso tudo junto, nós temos um caractere apropriado para cada pixel e uma nova cor.
+Finally, when putting it all together, we will have an appropriate character for each pixel and a new color.
 
 ![Frame Image by Characters](./images/imgPixelImage.png)
 
-## Contribuidores
+## Contributors
 
-### Contribuidores de código
+### Code Contributors
 
-Esse projeto existe graças as todas as pessoas que contribuíram. [[Contribua](./CONTRIBUTING.md)].
+This project exists thanks to all the people who contribute. [[Contribute](./CONTRIBUTING.md)].
 
 <a href="https://github.com/joelibaceta/video-to-ascii/graphs/contributors"><img src="https://opencollective.com/video-to-ascii/contributors.svg?width=890&button=false" /></a>
 
-### Contribuidores Financeiros
+### Financial Contributors
 
-Se torne um contribuidor financeiro e ajude a sustentar nossa comunidade. [[Contribua](https://opencollective.com/video-to-ascii/contribute/)].
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/video-to-ascii/contribute/)].
 
-Ou apenas me ajude [comprando um café](https://ko-fi.com/joelibaceta).
+Or maybe just [buy me a coffee](https://ko-fi.com/joelibaceta).
 
-#### Individuos
+#### Individuals
 
 <a href="https://opencollective.com/video-to-ascii#backers" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/individuals.svg?width=890"></a>
 
-#### Organizações
+#### Organizations
 
-Suporte esse projeto com a sua organização. Sua logo vai aparecer aqui com o link do seu website. [[Contribua](https://opencollective.com/video-to-ascii/contribute)]
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/video-to-ascii/contribute)]
 
 <a href="https://opencollective.com/video-to-ascii/organization/0/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/0/avatar.svg"></a>
 <a href="https://opencollective.com/video-to-ascii/organization/1/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/1/avatar.svg"></a>
@@ -144,5 +143,5 @@ Suporte esse projeto com a sua organização. Sua logo vai aparecer aqui com o l
 <a href="https://opencollective.com/video-to-ascii/organization/8/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/8/avatar.svg"></a>
 <a href="https://opencollective.com/video-to-ascii/organization/9/website" target="_blank" rel="noopener"><img src="https://opencollective.com/video-to-ascii/organization/9/avatar.svg"></a>
 
-## Visto em
+## As Seen On
 <a href="https://www.producthunt.com/posts/video-to-ascii" target="_blank" rel="noopener"><img src="https://user-images.githubusercontent.com/864790/124545434-a2e7fe80-ddee-11eb-9d80-f24049524fd9.png" width="100px"></a>
