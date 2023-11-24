@@ -15,7 +15,8 @@ def install_package(package):
 
 if "--with-audio" in sys.argv:
     install_package('opencv-python')
-    install_package('pyaudio')
+    install_package('soundfile')
+    install_package('sounddevice')
     sys.argv.remove("--with-audio")
 else:
     install_package('opencv-python')
