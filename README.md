@@ -31,7 +31,7 @@
 - Python3
 - PortAudio (_Only required for installation with audio support_)
 - FFmpeg (_Only required for installation with audio support_)
-- Linux or MacOS ... by now
+- Linux or MacOS ... for now
 
 ## Installation
 
