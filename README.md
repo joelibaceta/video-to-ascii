@@ -93,6 +93,13 @@ Just run `video-to-ascii` in your terminal
 $ video-to-ascii -f myvideo.mp4
 ```
 
+If you have a video device like a webcam you can use the device file, too.
+
+```bash
+$ video-to-ascii -f /dev/video0
+```
+
+
 ### Options
 
 **`--strategy`**
