@@ -38,7 +38,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-cuda = ["cupy-cuda12x>=13,<14"]
+cuda = [
+    "cupy-cuda12x>=12,<13; python_version < '3.9'",
+    # fastrlock 0.8.4's generated extension requires Python 3.9 or newer.
+    "fastrlock<0.8.4; python_version < '3.9'",
+    "cupy-cuda12x>=13,<14; python_version >= '3.9'",
+]
 audio = ["pyaudio>=0.2.11"]
 dev = [
     "pytest>=6.0",

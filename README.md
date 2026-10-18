@@ -3,6 +3,8 @@
 Install `pip install -e ".[cuda]"` and an NVIDIA-enabled FFmpeg with NVDEC,
 `scale_cuda`, and NVENC support. Set `CUDA_PATH` if the toolkit is not installed
 at `/usr/local/cuda`. A CUDA-enabled OpenCV build is not required.
+The video backend targets desktop NVIDIA GPUs with CUDA 12; Jetson video
+decoding and encoding are not supported by this backend.
 
 ```bash
 video-to-ascii -f INPUT.MOV --backend cuda --strategy ascii-color \
