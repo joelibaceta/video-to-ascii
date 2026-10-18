@@ -1,3 +1,26 @@
+## Optional CUDA acceleration
+
+Install `pip install -e ".[cuda]"` and an NVIDIA-enabled FFmpeg with NVDEC,
+`scale_cuda`, and NVENC support. Set `CUDA_PATH` if the toolkit is not installed
+at `/usr/local/cuda`. A CUDA-enabled OpenCV build is not required.
+
+```bash
+video-to-ascii -f INPUT.MOV --backend cuda --strategy ascii-color \
+  --quality lossless -o OUTPUT.mp4
+```
+
+CUDA accelerates decoding/resizing, glyph and ANSI color selection, and NV12
+rasterization for NVENC. Host memory connects FFmpeg and CuPy; this is not
+zero-copy. `cpu` remains the default and uses OpenCV/libx264. `auto` permits GPU-to-CPU
+fallback, and explicit `cuda` fails when unavailable. MP4 retains displayed resolution and audio by default;
+odd axes are padded by one pixel. Lossless encoding preserves rendered YUV420,
+not the original video's pixels. Frame timing uses the average source rate.
+`--columns`, `--rows`, and `--max-frames` allow explicit sizing and short tests.
+Shell and JSON outputs remain available. MP4 rendering needs a monospace font.
+
+Run tests with `python -m unittest discover -s tests -v`. On an NVIDIA host,
+set `VIDEO_TO_ASCII_TEST_CUDA=1` to include CUDA parity and integration tests.
+
 <div align=center>
 
   ![Logo](./images/logo.svg)

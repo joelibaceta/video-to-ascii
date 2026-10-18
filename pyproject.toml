@@ -31,11 +31,14 @@ classifiers = [
 requires-python = ">=3.8"
 dependencies = [
     "opencv-python>=4.5.0",
-    "xtermcolor>=2.0.0",
+    "numpy>=1.24",
+    "Pillow>=10",
+    "xtermcolor>=1.3",
     "ffmpeg-python>=0.2.0",
 ]
 
 [project.optional-dependencies]
+cuda = ["cupy-cuda12x>=13,<14"]
 audio = ["pyaudio>=0.2.11"]
 dev = [
     "pytest>=6.0",
