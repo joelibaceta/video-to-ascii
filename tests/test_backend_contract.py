@@ -31,7 +31,8 @@ class RendererContract:
         from video_to_ascii.mp4_export import CellRasterizer
         frame = np.random.default_rng(9).integers(0, 256, (12, 20, 3), dtype=np.uint8)
         strategy = AsciiColorStrategy()
-        rasterizer = CellRasterizer((40, 15))
+        # Odd centering offsets exercise chroma blocks spanning glyph/background edges.
+        rasterizer = CellRasterizer((40, 15), (406, 286))
         mapper = self.make_renderer(strategy)
         mapper.configure_raster(rasterizer)
         raw = np.frombuffer(mapper.render_frame(frame), dtype=np.uint8)
@@ -44,6 +45,20 @@ class RendererContract:
             y = raw[:rasterizer.width*rasterizer.height].reshape(rasterizer.height, rasterizer.width)
             expected_y = cv2.cvtColor(cpu, cv2.COLOR_RGB2YUV_I420)[:rasterizer.height]
             np.testing.assert_allclose(y.astype(int), expected_y.astype(int), atol=1)
+
+            # Compare chroma against the RGB raster with BT.601 limited-range
+            # conversion and 2x2 box averaging, independently of the GPU mapper.
+            r, g, b = cpu.astype(np.int32).transpose(2, 0, 1)
+            full_u = ((-38*r - 74*g + 112*b + 128) >> 8) + 128
+            full_v = ((112*r - 94*g - 18*b + 128) >> 8) + 128
+            uv = raw[rasterizer.width*rasterizer.height:].reshape(
+                rasterizer.height // 2, rasterizer.width)
+            for channel, full in enumerate((full_u, full_v)):
+                expected = np.clip((full.reshape(rasterizer.height // 2, 2,
+                                                rasterizer.width // 2, 2).sum(axis=(1, 3)) + 2) // 4,
+                                   0, 255).astype(np.uint8)
+                np.testing.assert_array_equal(uv[:, channel::2], expected)
+
 
     def test_invalid_frame_buffers_are_rejected_before_kernel_launch(self):
         mapper = self.make_renderer(AsciiColorStrategy())
