@@ -1,3 +1,44 @@
+## Optional GPU acceleration
+
+CPU remains the default. Select `--backend cuda` for NVIDIA or `--backend metal`
+for Apple Silicon. `--backend mlx` remains an alias for `metal`. Install the
+matching optional dependency with `pip install -e ".[cuda]"` or
+`pip install -e ".[metal]"`; Apple acceleration needs Python 3.10+ on arm64 macOS.
+
+```bash
+video-to-ascii -f INPUT.MOV --backend cuda --strategy ascii-color -o OUTPUT.mp4
+video-to-ascii -f INPUT.MOV --backend metal --strategy ascii-color -o OUTPUT.mp4
+```
+
+Ordinary CPU calls retain the existing pixel conversion, sizing, and text-export
+behavior. Selecting `cuda`, `metal`, `mlx`, or `auto`, or using the new sizing
+and frame-limit options, selects
+the extended rendering pipeline. MP4 export uses that pipeline on every backend.
+
+A shared player and export pipeline uses CPU, CUDA, or Metal frame renderers.
+Decoding, rendering, and encoding are selected independently. `--backend auto`
+tries the platform GPU and permits CPU fallback during initialization; explicit
+GPU modes report failures. Failures after processing begins are reported rather
+than silently restarting a partial conversion.
+
+NVIDIA acceleration needs CUDA 12, CuPy, and FFmpeg with NVDEC, `scale_cuda`, and
+NVENC. Set `CUDA_PATH` if the toolkit is outside `/usr/local/cuda`. A CUDA-enabled
+OpenCV build is not required. Jetson can use CUDA rendering with CPU video I/O
+through `auto`; its platform video codecs are not implemented by this backend.
+
+Apple acceleration uses MLX/Metal rendering and FFmpeg VideoToolbox decoding and
+standard H.264 encoding. Apple resizing and float64 saturation normalization stay
+on CPU. Host memory connects the video and rendering stages. `--quality lossless`
+uses NVENC on supported NVIDIA hardware and libx264 on CPU or Apple, preserving
+the rendered YUV420 frames. MP4 retains displayed resolution and audio by default;
+odd axes are padded by one pixel. Frame timing uses the average source rate.
+`--columns`, `--rows`, and `--max-frames` support explicit sizing and short tests.
+Shell and JSON outputs remain available. MP4 rendering needs a monospace font.
+
+Run `python -m unittest discover -s tests -v`. Set
+`VIDEO_TO_ASCII_TEST_CUDA=1` or `VIDEO_TO_ASCII_TEST_MLX=1` to include the shared
+GPU rendering contract and full video integration tests on the matching hardware.
+
 <div align=center>
 
   ![Logo](./images/logo.svg)
