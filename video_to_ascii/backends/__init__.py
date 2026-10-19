@@ -26,10 +26,10 @@ def create_renderer(backend, strategy, rasterizer=None):
     target = backend_for(backend)
     try:
         if target == 'cuda':
-            from ..cuda_renderer import CudaCellMapper
+            from .cuda import CudaCellMapper
             renderer = CudaCellMapper(strategy)
         elif target == 'metal':
-            from ..mlx_renderer import MlxCellMapper
+            from .metal import MlxCellMapper
             renderer = MlxCellMapper(strategy)
         else:
             from .cpu import CpuRenderer

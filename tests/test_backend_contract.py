@@ -103,7 +103,7 @@ class CudaContract(RendererContract, unittest.TestCase):
     quality = 'lossless'
 
     def make_renderer(self, strategy):
-        from video_to_ascii.cuda_renderer import CudaCellMapper
+        from video_to_ascii.backends.cuda import CudaCellMapper
         return CudaCellMapper(strategy)
 
 
@@ -113,5 +113,5 @@ class MetalContract(RendererContract, unittest.TestCase):
     backend = 'metal'
 
     def make_renderer(self, strategy):
-        from video_to_ascii.mlx_renderer import MlxCellMapper
+        from video_to_ascii.backends.metal import MlxCellMapper
         return MlxCellMapper(strategy)

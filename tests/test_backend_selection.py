@@ -32,20 +32,22 @@ class BackendSelectionTests(unittest.TestCase):
                         'import sys; from video_to_ascii.backends import create_renderer; '
                         'from video_to_ascii.render_strategy.ascii_color_strategy import AsciiColorStrategy; '
                         'assert create_renderer("cpu", AsciiColorStrategy()).name == "cpu"; '
-                        'assert "cupy" not in sys.modules and "mlx.core" not in sys.modules'], check=True)
+                        'assert "cupy" not in sys.modules and "mlx.core" not in sys.modules; '
+                        'assert "video_to_ascii.backends.cuda" not in sys.modules; '
+                        'assert "video_to_ascii.backends.metal" not in sys.modules'], check=True)
 
     def test_explicit_gpu_initialization_failure_is_not_hidden(self):
-        for name, module in [('cuda', 'cuda_renderer.CudaCellMapper'),
-                             ('metal', 'mlx_renderer.MlxCellMapper'),
-                             ('mlx', 'mlx_renderer.MlxCellMapper')]:
+        for name, module in [('cuda', 'backends.cuda.CudaCellMapper'),
+                             ('metal', 'backends.metal.MlxCellMapper'),
+                             ('mlx', 'backends.metal.MlxCellMapper')]:
             with self.subTest(backend=name), patch('video_to_ascii.' + module,
                                                   side_effect=ImportError('missing GPU library')):
                 with self.assertRaisesRegex(RuntimeError, 'missing GPU library'):
                     create_renderer(name, AsciiColorStrategy())
 
     def test_auto_renderer_falls_back_for_either_platform(self):
-        for target, module in [('cuda', 'cuda_renderer.CudaCellMapper'),
-                               ('metal', 'mlx_renderer.MlxCellMapper')]:
+        for target, module in [('cuda', 'backends.cuda.CudaCellMapper'),
+                               ('metal', 'backends.metal.MlxCellMapper')]:
             with self.subTest(target=target), patch('video_to_ascii.backends.backend_for', return_value=target), patch(
                     'video_to_ascii.' + module, side_effect=RuntimeError('compile failed')):
                 self.assertEqual(create_renderer('auto', AsciiColorStrategy()).name, 'cpu')
@@ -55,7 +57,7 @@ class BackendSelectionTests(unittest.TestCase):
         gpu.configure_raster.side_effect = RuntimeError('GPU allocation failed')
         rasterizer = CellRasterizer((40, 15))
         with patch('video_to_ascii.backends.backend_for', return_value='cuda'), patch(
-                'video_to_ascii.cuda_renderer.CudaCellMapper', return_value=gpu):
+                'video_to_ascii.backends.cuda.CudaCellMapper', return_value=gpu):
             renderer = create_renderer('auto', AsciiColorStrategy(), rasterizer)
         self.assertEqual(renderer.name, 'cpu')
         self.assertIs(renderer.rasterizer, rasterizer)
@@ -106,3 +108,27 @@ class BackendSelectionTests(unittest.TestCase):
             self.assertEqual(select_encoder('auto'), 'libx264')
             with self.assertRaisesRegex(RuntimeError, 'ffmpeg'):
                 select_encoder('cuda')
+
+
+class BackendImportTests(unittest.TestCase):
+    def test_previous_cuda_import_resolves_to_same_implementation(self):
+        from video_to_ascii.backends.cuda import CUDA_SOURCE, CudaCellMapper
+        from video_to_ascii import cuda_renderer
+        self.assertIs(cuda_renderer.CudaCellMapper, CudaCellMapper)
+        self.assertIs(cuda_renderer.CUDA_SOURCE, CUDA_SOURCE)
+
+    def test_previous_mlx_import_resolves_to_same_implementation(self):
+        from video_to_ascii.backends.metal import MAP_SOURCE, RASTER_SOURCE, MlxCellMapper
+        from video_to_ascii import mlx_renderer
+        self.assertIs(mlx_renderer.MlxCellMapper, MlxCellMapper)
+        self.assertIs(mlx_renderer.MAP_SOURCE, MAP_SOURCE)
+        self.assertIs(mlx_renderer.RASTER_SOURCE, RASTER_SOURCE)
+
+    def test_backend_modules_can_be_imported_without_gpu_libraries(self):
+        subprocess.run([sys.executable, '-c',
+                        'import sys; import video_to_ascii.backends.cpu; '
+                        'import video_to_ascii.backends.cuda; '
+                        'import video_to_ascii.backends.metal; '
+                        'import video_to_ascii.cuda_renderer; '
+                        'import video_to_ascii.mlx_renderer; '
+                        'assert "cupy" not in sys.modules and "mlx.core" not in sys.modules'], check=True)
